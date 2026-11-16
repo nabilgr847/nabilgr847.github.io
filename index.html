@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Md Gausur Rahman Nabil — Interactive 3D Workstation &amp; Portfolio</title>
-<meta name="description" content="Interactive 3D developer workstation and NabilOS portfolio of Md Gausur Rahman Nabil — Researcher in Medical AI, Biomedical Research, Cybersecurity, and Full-Stack Development.">
+<meta name="description" content="Interactive 3D developer workstation and portfolio of Md Gausur Rahman Nabil — Researcher in Medical AI, Biomedical Research, Cybersecurity, and Full-Stack Development.">
 <link rel="canonical" href="https://nabilgr847.github.io/">
-<meta property="og:title" content="Md Gausur Rahman Nabil — Interactive 3D Workstation">
-<meta property="og:description" content="Explore Md Gausur Rahman Nabil's 3D research desk and interactive NabilOS desktop featuring MedAI Hospital screenshots, publications, awards, and certifications.">
+<meta property="og:title" content="Md Gausur Rahman Nabil — Interactive 3D Workstation & Portfolio">
+<meta property="og:description" content="Explore Md Gausur Rahman Nabil's 3D research desk and interactive portfolio featuring MedAI Hospital screenshots, publications, detailed project walkthroughs, awards, and certifications.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://nabilgr847.github.io/">
 <meta property="og:image" content="https://nabilgr847.github.io/md-gausur-rahman-nabil.jpg">
@@ -66,12 +66,12 @@
     position: fixed;
     z-index: 40;
     pointer-events: none;
-    background: rgba(8, 15, 28, 0.95);
+    background: rgba(8, 15, 28, 0.96);
     border: 1px solid rgba(56, 189, 248, 0.55);
     color: #f0f9ff;
-    padding: 5px 11px;
+    padding: 6px 12px;
     border-radius: 8px;
-    font: 600 12px var(--mono);
+    font: 600 12px var(--sans);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
     opacity: 0;
     transform: translate(14px, 14px);
@@ -92,7 +92,7 @@
     color: #ecfdf5;
     padding: 8px 16px;
     border-radius: 999px;
-    font: 600 12.5px var(--mono);
+    font: 600 12.5px var(--sans);
     box-shadow: 0 10px 28px rgba(0, 0, 0, 0.6);
     opacity: 0;
     transition: opacity 0.2s, transform 0.2s;
@@ -110,16 +110,16 @@
     display: none;
     align-items: center;
     justify-content: center;
-    padding: 64px 18px 50px;
-    background: radial-gradient(circle at center, rgba(8, 16, 30, 0.78), rgba(4, 7, 14, 0.95));
+    padding: 62px 18px 48px;
+    background: radial-gradient(circle at center, rgba(8, 16, 30, 0.8), rgba(4, 7, 14, 0.95));
   }
   #os-hd-stage.active {
     display: flex;
   }
   .hd-bezel {
     position: relative;
-    width: min(96vw, 1140px);
-    height: min(80vh, 690px);
+    width: min(97vw, 1180px);
+    height: min(82vh, 710px);
     padding: 10px;
     border-radius: 14px;
     background: linear-gradient(160deg, #253044, #141c2b);
@@ -212,7 +212,7 @@
   }
 
   /* =========================================================
-     NABIL_OS — Crisp Desktop inside the 3D Monitor / HD Dock
+     Nabil Workstation OS — Crisp Desktop inside 3D Monitor / HD Dock
      ========================================================= */
   #os-screen {
     width: 1024px;
@@ -302,13 +302,13 @@
     height: 100%;
     width: 0%;
     background: #34d399;
-    transition: width 0.75s ease;
+    transition: width 0.7s ease;
   }
 
   .desktop {
     position: relative;
     flex: 1;
-    padding: 18px 20px;
+    padding: 16px 18px;
     overflow: hidden;
   }
   .desktop::before {
@@ -322,25 +322,31 @@
     pointer-events: none;
   }
 
-  /* Live Desktop Status Widget on right side */
+  /* Desktop Cover Widget on right side */
   .desktop-widget {
     position: absolute;
-    top: 18px;
-    right: 20px;
-    width: 240px;
-    background: rgba(11, 20, 36, 0.88);
-    border: 1px solid rgba(56, 189, 248, 0.28);
+    top: 16px;
+    right: 18px;
+    width: 264px;
+    background: rgba(11, 20, 36, 0.92);
+    border: 1px solid rgba(56, 189, 248, 0.32);
     border-radius: 12px;
-    padding: 13px 14px;
+    overflow: hidden;
     z-index: 1;
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45);
   }
-  .dw-title {
-    font: 700 11px var(--mono);
-    color: var(--cyan);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    margin-bottom: 8px;
+  .dw-cover {
+    height: 82px;
+    background: linear-gradient(125deg, rgba(2, 132, 199, 0.78), rgba(13, 148, 136, 0.72)), url('./assets/screenshots/medai-landing.png') top center / cover no-repeat;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    border-bottom: 1px solid rgba(56, 189, 248, 0.3);
   }
+  .dw-cover strong { font-size: 13.5px; color: #fff; }
+  .dw-cover span { font-size: 11px; color: #e0f2fe; }
+  .dw-body { padding: 12px 13px; }
   .dw-stats {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -348,8 +354,8 @@
     margin-bottom: 10px;
   }
   .dw-stat {
-    background: rgba(15, 28, 48, 0.9);
-    border: 1px solid rgba(148, 163, 184, 0.16);
+    background: rgba(15, 28, 48, 0.92);
+    border: 1px solid rgba(148, 163, 184, 0.18);
     border-radius: 8px;
     padding: 7px 9px;
     cursor: pointer;
@@ -364,7 +370,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font: 600 11px var(--mono);
+    font: 600 11.5px var(--sans);
     color: #cbd5e1;
     padding-top: 8px;
     border-top: 1px solid rgba(148, 163, 184, 0.16);
@@ -373,7 +379,7 @@
     width: 16px;
     height: 16px;
     border-radius: 50%;
-    border: 2px solid rgba(255, 255, 255, 0.35);
+    border: 2px solid rgba(255, 255, 255, 0.4);
     cursor: pointer;
     padding: 0;
   }
@@ -388,7 +394,7 @@
     width: max-content;
   }
   .d-icon {
-    width: 90px;
+    width: 104px;
     padding: 8px 6px;
     border-radius: 8px;
     border: 1px solid transparent;
@@ -402,6 +408,7 @@
     text-align: center;
     font-size: 12px;
     font-weight: 600;
+    line-height: 1.25;
     transition: background 0.15s, border-color 0.15s, transform 0.12s;
   }
   .d-icon:hover {
@@ -454,7 +461,7 @@
   }
   .win-titlebar:active { cursor: grabbing; }
   .win-title {
-    font: 600 12.5px var(--mono);
+    font: 600 13px var(--sans);
     color: #f0f9ff;
     white-space: nowrap;
     overflow: hidden;
@@ -479,46 +486,87 @@
   .win-body {
     flex: 1;
     overflow-y: auto;
-    padding: 16px 18px;
+    padding: 16px 20px 22px;
     font-size: 14px;
-    line-height: 1.62;
+    line-height: 1.66;
     user-select: text;
     color: #e2e8f0;
   }
   .win-body::-webkit-scrollbar { width: 7px; }
   .win-body::-webkit-scrollbar-thumb { background: rgba(56, 189, 248, 0.35); border-radius: 4px; }
 
+  /* Rich Cover Banners inside Windows */
+  .section-cover {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 20px 22px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(56, 189, 248, 0.36);
+    background-size: cover;
+    background-position: center;
+  }
+  .section-cover.about-cover {
+    background-image:
+      linear-gradient(120deg, rgba(7, 16, 30, 0.94) 35%, rgba(14, 116, 144, 0.68) 100%),
+      url('./assets/screenshots/medai-3d-anatomy.png');
+  }
+  .section-cover.projects-cover {
+    background-image:
+      linear-gradient(120deg, rgba(6, 18, 34, 0.92) 30%, rgba(16, 185, 129, 0.58) 100%),
+      url('./assets/screenshots/medai-landing.png');
+    background-position: top center;
+  }
+  .section-cover.research-cover {
+    background: linear-gradient(125deg, #0b1b33 0%, #162e4d 55%, #0f3c4c 100%);
+  }
+  .section-cover.contact-cover {
+    background: linear-gradient(125deg, #0f2542 0%, #103a49 60%, #09182c 100%);
+  }
+  .section-cover h3 {
+    margin: 4px 0 6px;
+    font-size: 20px;
+    color: #ffffff;
+  }
+  .section-cover p {
+    margin: 0;
+    color: #dbeafe;
+    font-size: 13.6px;
+    line-height: 1.58;
+  }
+
   .about-grid {
     display: grid;
-    grid-template-columns: 142px 1fr;
-    gap: 16px;
+    grid-template-columns: 146px 1fr;
+    gap: 18px;
     align-items: start;
   }
   .about-photo {
-    width: 142px;
-    height: 142px;
+    width: 146px;
+    height: 146px;
     border-radius: 12px;
     object-fit: cover;
-    border: 2px solid rgba(56, 189, 248, 0.55);
+    border: 2px solid rgba(56, 189, 248, 0.58);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45);
   }
   .tag-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
   .tag-chip {
-    font: 600 11.5px var(--mono);
+    font: 600 11.5px var(--sans);
     background: rgba(56, 189, 248, 0.14);
     border: 1px solid rgba(56, 189, 248, 0.34);
     color: #bae6fd;
-    padding: 3px 9px;
-    border-radius: 5px;
+    padding: 4px 10px;
+    border-radius: 6px;
   }
   .item-card {
     background: #132036;
     border: 1px solid rgba(148, 163, 184, 0.22);
-    border-radius: 8px;
-    padding: 13px 15px;
-    margin-bottom: 11px;
+    border-radius: 9px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
   }
-  .item-card h4 { margin: 2px 0 5px; font-size: 15px; color: #ffffff; }
-  .item-card p { margin: 0 0 7px; color: #cbd5e1; font-size: 13.3px; }
+  .item-card h4 { margin: 3px 0 6px; font-size: 15.5px; color: #ffffff; line-height: 1.4; }
+  .item-card p { margin: 0 0 8px; color: #cbd5e1; font-size: 13.6px; line-height: 1.62; }
   .item-card a { color: #34d399; font: 600 12.5px var(--mono); text-decoration: none; }
   .item-card a:hover { text-decoration: underline; }
   .meta-label {
@@ -528,16 +576,16 @@
     letter-spacing: 0.06em;
   }
 
-  /* Screenshot Gallery inside Projects.app */
+  /* Screenshot Gallery inside Projects */
   .shot-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
     gap: 10px;
     margin-top: 12px;
   }
   .shot-thumb {
     background: #0a1220;
-    border: 1px solid rgba(56, 189, 248, 0.3);
+    border: 1px solid rgba(56, 189, 248, 0.32);
     border-radius: 8px;
     overflow: hidden;
     cursor: pointer;
@@ -551,16 +599,22 @@
   }
   .shot-thumb img {
     width: 100%;
-    height: 105px;
+    height: 108px;
     object-fit: cover;
     object-position: top center;
     display: block;
   }
+  .shot-thumb strong {
+    display: block;
+    padding: 7px 9px 2px;
+    font: 700 12px var(--sans);
+    color: #f8fafc;
+  }
   .shot-thumb span {
     display: block;
-    padding: 6px 8px;
-    font: 600 11.5px var(--sans);
-    color: #e2e8f0;
+    padding: 0 9px 8px;
+    font: 400 11.2px/1.38 var(--sans);
+    color: #94a3b8;
   }
 
   /* Lightbox inside OS */
@@ -568,7 +622,7 @@
     position: absolute;
     inset: 0;
     z-index: 950;
-    background: rgba(4, 8, 15, 0.95);
+    background: rgba(4, 8, 15, 0.96);
     display: none;
     flex-direction: column;
     align-items: center;
@@ -578,7 +632,7 @@
   #shot-lightbox.open { display: flex; }
   #shot-lightbox img {
     max-width: 92%;
-    max-height: 78%;
+    max-height: 73%;
     object-fit: contain;
     border-radius: 8px;
     border: 1px solid rgba(56, 189, 248, 0.45);
@@ -591,8 +645,15 @@
     align-items: center;
     gap: 8px;
     margin-bottom: 10px;
-    font: 600 13px var(--mono);
+    font: 600 13px var(--sans);
     color: #e0f2fe;
+  }
+  .lb-desc {
+    width: 92%;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 13px;
+    color: #cbd5e1;
   }
   .lb-actions { display: flex; gap: 8px; }
   .lb-nav {
@@ -601,7 +662,7 @@
     border: 1px solid rgba(56, 189, 248, 0.4);
     border-radius: 6px;
     padding: 5px 11px;
-    font: 700 12px var(--mono);
+    font: 700 12px var(--sans);
     cursor: pointer;
   }
   .lb-close {
@@ -610,7 +671,7 @@
     border: 0;
     border-radius: 6px;
     padding: 5px 12px;
-    font: 700 12px var(--mono);
+    font: 700 12px var(--sans);
     cursor: pointer;
   }
 
@@ -621,7 +682,7 @@
     color: #e2e8f0;
     padding: 5px 11px;
     border-radius: 6px;
-    font: 600 12px var(--mono);
+    font: 600 12px var(--sans);
     cursor: pointer;
   }
   .os-filter.active { background: #0ea5e9; color: #03111c; border-color: transparent; }
@@ -631,7 +692,7 @@
     background: #08101d;
     border: 1px solid rgba(56, 189, 248, 0.3);
     border-radius: 7px;
-    padding: 7px 11px;
+    padding: 8px 11px;
     color: #f1f5f9;
     font: 13px var(--sans);
     margin-bottom: 10px;
@@ -645,13 +706,13 @@
     color: #7dd3fc;
     border-radius: 6px;
     padding: 4px 10px;
-    font: 600 11.5px var(--mono);
+    font: 600 11.5px var(--sans);
     cursor: pointer;
     margin-left: 6px;
   }
   .copy-btn:hover { background: rgba(56, 189, 248, 0.32); color: #fff; }
 
-  /* MedAI Triage Interactive Simulator inside OS */
+  /* MedAI Triage Interactive Simulator */
   .sim-regions { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin: 10px 0; }
   .sim-btn {
     background: #132036;
@@ -721,7 +782,7 @@
     border: 0;
     border-radius: 6px;
     padding: 6px 12px;
-    font: 700 12.5px var(--mono);
+    font: 700 12.5px var(--sans);
     cursor: pointer;
   }
   .task-tabs { flex: 1; display: flex; gap: 6px; overflow-x: auto; }
@@ -731,7 +792,7 @@
     color: #e2e8f0;
     border-radius: 6px;
     padding: 5px 10px;
-    font: 600 12px var(--mono);
+    font: 600 12px var(--sans);
     cursor: pointer;
     white-space: nowrap;
   }
@@ -741,7 +802,7 @@
     position: absolute;
     bottom: 48px;
     left: 12px;
-    width: 255px;
+    width: 268px;
     background: #0b1322;
     border: 1px solid rgba(56, 189, 248, 0.42);
     border-radius: 10px;
@@ -786,7 +847,7 @@
 
 <div class="hud-top">
   <div class="hud-group">
-    <div class="hud-pill"><span class="status-dot"></span><span>NABIL_OS · 3D WORKSTATION</span></div>
+    <div class="hud-pill"><span class="status-dot"></span><span>MD GAUSUR RAHMAN NABIL · 3D WORKSTATION</span></div>
     <button class="hud-pill hud-btn primary" id="toggleViewBtn">Focus Monitor Screen ↗</button>
     <button class="hud-pill hud-btn" id="wallCamBtn">Wall Gallery</button>
     <button class="hud-pill hud-btn" id="lampBtn">Lamp: ON</button>
@@ -795,6 +856,7 @@
   </div>
   <div class="hud-group">
     <button class="hud-pill hud-btn" id="resetCamBtn">Reset Desk View</button>
+    <a class="hud-pill hud-btn" href="./Md-Gausur-Rahman-Nabil-3D-Interactive-Portfolio.pdf" target="_blank" rel="noopener">3D Portfolio PDF ↗</a>
     <a class="hud-pill hud-btn" href="./simple.html">2D Academic View ↗</a>
   </div>
 </div>
@@ -805,7 +867,7 @@
 
 <div id="os-mount" style="display:none">
   <div id="os-screen" class="desk-mode" data-theme="cyan">
-    <div id="screen-veil"><span class="veil-badge">Click Monitor for Crisp HD NabilOS ↗</span></div>
+    <div id="screen-veil"><span class="veil-badge">Click Monitor for Crisp HD View ↗</span></div>
 
     <div id="shot-lightbox">
       <div class="lb-bar">
@@ -817,88 +879,94 @@
         </div>
       </div>
       <img id="lbImg" src="" alt="MedAI Hospital Screenshot">
+      <div class="lb-desc" id="lbDesc"></div>
     </div>
 
     <div id="boot-screen">
       <div>
-        <div style="color:#38bdf8;font-weight:700">NABIL_BIOS v3.0 // INTERACTIVE 3D MEDICAL AI WORKSTATION</div>
+        <div style="color:#38bdf8;font-weight:700">MD GAUSUR RAHMAN NABIL // INTERACTIVE RESEARCH WORKSTATION</div>
         <div style="margin-top:10px;color:#cbd5e1">Initializing Three.js WebGL + 3D Raycast Interaction Engine... OK</div>
-        <div style="color:#cbd5e1">Mounting Crisp 1:1 HD Display Dock &amp; MedAI Hospital Gallery... OK</div>
-        <div style="color:#cbd5e1">Loading 5 Papers, 6 Projects, 13 Awards, 21 Certs &amp; Triage Sim... OK</div>
+        <div style="color:#cbd5e1">Mounting Crisp 1:1 HD Display Dock &amp; MedAI Hospital Showcase... OK</div>
+        <div style="color:#cbd5e1">Loading Full Research Details, 6 Projects, 13 Awards &amp; 21 Credentials... OK</div>
         <div class="boot-bar"><div class="boot-fill" id="bootFill"></div></div>
       </div>
-      <div style="color:#94a3b8;font-size:12px">Click anywhere or wait 0.8s to load desktop...</div>
+      <div style="color:#94a3b8;font-size:12px">Click anywhere or wait 0.8s to open workspace...</div>
     </div>
 
     <div class="desktop" id="desktop">
       <div class="desktop-icons">
         <button class="d-icon" data-app="about">
           <div class="icon-glyph" style="background:linear-gradient(135deg,#0ea5e9,#10b981);color:#03151e">ID</div>
-          <span>About_Me.app</span>
+          <span>About Me</span>
         </button>
         <button class="d-icon" data-app="projects">
           <div class="icon-glyph" style="background:linear-gradient(135deg,#10b981,#059669);color:#fff">&lt;/&gt;</div>
-          <span>Projects.app</span>
+          <span>Projects &amp; Gallery</span>
         </button>
         <button class="d-icon" data-app="research">
           <div class="icon-glyph" style="background:linear-gradient(135deg,#6366f1,#38bdf8);color:#fff">DOI</div>
-          <span>Research.pdf</span>
+          <span>Research &amp; Papers</span>
         </button>
         <button class="d-icon" data-app="medaiSim">
           <div class="icon-glyph" style="background:linear-gradient(135deg,#ef4444,#f97316);color:#fff">+AI</div>
-          <span>MedAI_Sim.app</span>
+          <span>MedAI Triage Lab</span>
         </button>
         <button class="d-icon" data-app="awards">
           <div class="icon-glyph" style="background:linear-gradient(135deg,#f59e0b,#d97706);color:#111">#1</div>
-          <span>Awards_13.log</span>
+          <span>Awards &amp; Honours</span>
         </button>
         <button class="d-icon" data-app="credentials">
           <div class="icon-glyph" style="background:linear-gradient(135deg,#ec4899,#8b5cf6);color:#fff">SEC</div>
-          <span>Credentials.db</span>
+          <span>Certifications</span>
         </button>
         <button class="d-icon" data-app="terminal">
           <div class="icon-glyph" style="background:#0f172a;border:1px solid #34d399;color:#34d399">&gt;_</div>
-          <span>Terminal.sh</span>
+          <span>Command Console</span>
         </button>
         <button class="d-icon" data-app="contact">
           <div class="icon-glyph" style="background:linear-gradient(135deg,#06b6d4,#3b82f6);color:#fff">@</div>
-          <span>Contact.mail</span>
+          <span>Contact &amp; Email</span>
         </button>
       </div>
 
       <div class="desktop-widget">
-        <div class="dw-title">Researcher Dashboard</div>
-        <div class="dw-stats">
-          <button class="dw-stat" data-app="research"><strong>5</strong><span>Papers &amp; DOIs</span></button>
-          <button class="dw-stat" data-app="projects"><strong>7</strong><span>MedAI Screens</span></button>
-          <button class="dw-stat" data-app="awards"><strong>13</strong><span>Honours</span></button>
-          <button class="dw-stat" data-app="credentials"><strong>21</strong><span>Credentials</span></button>
+        <div class="dw-cover">
+          <strong>Md Gausur Rahman Nabil</strong>
+          <span>Medical AI · Biomedical · Full-Stack</span>
         </div>
-        <div class="theme-dots">
-          <span>Wallpaper:</span>
-          <div style="display:flex;gap:7px">
-            <button class="theme-dot-btn" data-set-theme="cyan" title="Cyber Cyan" style="background:#0ea5e9"></button>
-            <button class="theme-dot-btn" data-set-theme="emerald" title="Bio Emerald" style="background:#10b981"></button>
-            <button class="theme-dot-btn" data-set-theme="indigo" title="Midnight Indigo" style="background:#6366f1"></button>
+        <div class="dw-body">
+          <div class="dw-stats">
+            <button class="dw-stat" data-app="research"><strong>5</strong><span>Papers &amp; DOIs</span></button>
+            <button class="dw-stat" data-app="projects"><strong>7</strong><span>MedAI Screens</span></button>
+            <button class="dw-stat" data-app="awards"><strong>13</strong><span>Honours</span></button>
+            <button class="dw-stat" data-app="credentials"><strong>21</strong><span>Certifications</span></button>
+          </div>
+          <div class="theme-dots">
+            <span>Wallpaper:</span>
+            <div style="display:flex;gap:7px">
+              <button class="theme-dot-btn" data-set-theme="cyan" title="Cyber Cyan" style="background:#0ea5e9"></button>
+              <button class="theme-dot-btn" data-set-theme="emerald" title="Bio Emerald" style="background:#10b981"></button>
+              <button class="theme-dot-btn" data-set-theme="indigo" title="Midnight Indigo" style="background:#6366f1"></button>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
     <div class="start-menu" id="startMenu">
-      <div style="font:700 11px var(--mono);color:#38bdf8;padding:4px 10px 8px;border-bottom:1px solid rgba(56,189,248,0.2)">NABIL_OS APPLICATIONS</div>
-      <button class="start-item" data-app="about"><span>About Nabil</span><span>Profile</span></button>
-      <button class="start-item" data-app="projects"><span>Projects &amp; MedAI Gallery</span><span>7 Shots</span></button>
-      <button class="start-item" data-app="research"><span>Research Papers (5)</span><span>DOI</span></button>
-      <button class="start-item" data-app="medaiSim"><span>MedAI Triage Simulator</span><span>Live</span></button>
-      <button class="start-item" data-app="awards"><span>Awards &amp; Ranks (13)</span><span>Log</span></button>
-      <button class="start-item" data-app="credentials"><span>Certifications (21)</span><span>Search</span></button>
-      <button class="start-item" data-app="terminal"><span>Interactive Terminal</span><span>CLI</span></button>
-      <button class="start-item" data-app="contact"><span>Contact &amp; Composer</span><span>Email</span></button>
+      <div style="font:700 11px var(--mono);color:#38bdf8;padding:4px 10px 8px;border-bottom:1px solid rgba(56,189,248,0.2)">PORTFOLIO SECTIONS</div>
+      <button class="start-item" data-app="about"><span>About Me &amp; Cover</span><span>Profile</span></button>
+      <button class="start-item" data-app="projects"><span>Projects &amp; MedAI Gallery</span><span>6 Builds</span></button>
+      <button class="start-item" data-app="research"><span>Research &amp; Publications</span><span>5 Works</span></button>
+      <button class="start-item" data-app="medaiSim"><span>MedAI Triage Lab</span><span>Demo</span></button>
+      <button class="start-item" data-app="awards"><span>Awards &amp; Honours</span><span>13 Items</span></button>
+      <button class="start-item" data-app="credentials"><span>Certifications &amp; Learning</span><span>21 Items</span></button>
+      <button class="start-item" data-app="terminal"><span>Command Console</span><span>Shell</span></button>
+      <button class="start-item" data-app="contact"><span>Contact &amp; Email</span><span>Connect</span></button>
     </div>
 
     <div class="taskbar">
-      <button class="start-btn" id="startBtn">⊞ NabilOS</button>
+      <button class="start-btn" id="startBtn">⊞ Portfolio Menu</button>
       <div class="task-tabs" id="taskTabs"></div>
       <div class="clock" id="osClock">UTC 12:00</div>
     </div>
@@ -974,7 +1042,7 @@ try {
   webglRenderer.shadowMap.type = THREE.PCFSoftShadowMap;
   webglStage.appendChild(webglRenderer.domElement);
 } catch (err) {
-  console.warn('WebGL unavailable, using fullscreen HD OS:', err);
+  console.warn('WebGL unavailable, using fullscreen HD view:', err);
   osHdStage.classList.add('active');
   hdBezel.appendChild(osScreen);
   osScreen.classList.remove('desk-mode');
@@ -1034,7 +1102,7 @@ const matMatte = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.
 const matBezel = new THREE.MeshStandardMaterial({ color: 0x1b2333, roughness: 0.45, metalness: 0.28 });
 const matRoom = new THREE.MeshStandardMaterial({ color: 0x090d16, roughness: 0.95 });
 
-// Interactive 3D Object Registry (for Raycaster hover + click!)
+// Interactive 3D Object Registry
 const interactables = [];
 function registerInteractive(meshOrGroup, label, onClick) {
   meshOrGroup.traverse(child => {
@@ -1067,7 +1135,7 @@ const matEdge = new THREE.Mesh(new THREE.BoxGeometry(157.5, 0.5, 67.5), matEdgeM
 matEdge.position.set(2, 0.25, 18);
 scene.add(matEdge);
 
-// Framed 3D Wall Posters (Using Nabil's MedAI Hospital Screenshots!)
+// Framed 3D Wall Posters
 const texLoader = new THREE.TextureLoader();
 function createWallFrame(x, y, w, h, imgPath, repeatY, offsetY, shotIndex, label) {
   const frameGroup = new THREE.Group();
@@ -1088,8 +1156,8 @@ function createWallFrame(x, y, w, h, imgPath, repeatY, offsetY, shotIndex, label
     });
   });
 }
-createWallFrame(-105, 92, 66, 46, './assets/screenshots/medai-landing.png', 0.34, 0.66, 0, 'MedAI Hospital Poster · Click to Inspect');
-createWallFrame(105, 92, 66, 46, './assets/screenshots/medai-3d-anatomy.png', 0.24, 0.43, 1, '3D Anatomy Mapper · Click to Inspect');
+createWallFrame(-105, 92, 66, 46, './assets/screenshots/medai-landing.png', 0.34, 0.66, 0, 'MedAI Hospital Showcase — Click to Inspect');
+createWallFrame(105, 92, 66, 46, './assets/screenshots/medai-3d-anatomy.png', 0.24, 0.43, 1, '3D Anatomy Pain Mapper — Click to Inspect');
 
 // Canvas Texture Helper (Only Nabil's Name)
 function makeTextTexture(title, subtitle, width = 512, height = 160, bg = '#0e1728', accent = '#38bdf8') {
@@ -1148,7 +1216,7 @@ function updateWallClock() {
   wallClockCtx.fillText(timeStr, 160, 48);
   wallClockCtx.fillStyle = '#94a3b8';
   wallClockCtx.font = '600 14px monospace';
-  wallClockCtx.fillText('WORKSTATION ONLINE · NABIL_OS', 160, 74);
+  wallClockCtx.fillText('RESEARCH WORKSTATION ONLINE', 160, 74);
   wallClockTex.needsUpdate = true;
 }
 updateWallClock();
@@ -1174,7 +1242,7 @@ deskMat.position.set(2, 0.4, 18);
 deskMat.receiveShadow = true;
 scene.add(deskMat);
 
-// Monitor Casing + Stand (Clickable to Focus Monitor!)
+// Monitor Casing + Stand
 const monitorGroup = new THREE.Group();
 monitorGroup.position.copy(SCREEN_POS);
 monitorGroup.rotation.set(SCREEN_ROT_X, 0, 0);
@@ -1193,8 +1261,8 @@ monitorBack.position.set(0, -1, -10);
 const powerLed = new THREE.Mesh(new THREE.SphereGeometry(1, 10, 10), new THREE.MeshBasicMaterial({ color: 0x34d399 }));
 powerLed.position.set(55, -44.5, 2.2);
 monitorGroup.add(bTop, bBot, bLeft, bRight, monitorBack, powerLed);
-registerInteractive(monitorGroup, 'Click Monitor for Crisp HD NabilOS', () => transitionTo(true));
-registerInteractive(cutoutMesh, 'Click Monitor for Crisp HD NabilOS', () => transitionTo(true));
+registerInteractive(monitorGroup, 'Click Monitor for Crisp HD View', () => transitionTo(true));
+registerInteractive(cutoutMesh, 'Click Monitor for Crisp HD View', () => transitionTo(true));
 
 const standNeck = new THREE.Mesh(new THREE.BoxGeometry(16, 46, 7), matMetal);
 standNeck.position.set(0, 22, -32);
@@ -1202,7 +1270,7 @@ const standBase = new THREE.Mesh(new THREE.BoxGeometry(52, 2.5, 32), matMetal);
 standBase.position.set(0, 1.25, -26);
 scene.add(standNeck, standBase);
 
-// Mechanical Keyboard (Click to trigger typing wave & open Terminal!)
+// Mechanical Keyboard
 const kbGroup = new THREE.Group();
 kbGroup.position.set(-4, 1.5, 20);
 kbGroup.rotation.x = 0.08;
@@ -1229,7 +1297,7 @@ spacebar.position.set(-2, 1.8, 6.9);
 spacebar.userData.baseY = 1.8;
 kbGroup.add(spacebar);
 keyMeshes.push(spacebar);
-registerInteractive(kbGroup, 'Mechanical Keyboard · Click to Open Terminal.sh', () => {
+registerInteractive(kbGroup, 'Mechanical Keyboard — Open Command Console', () => {
   keyMeshes.forEach((k, i) => {
     setTimeout(() => {
       k.position.y = k.userData.baseY - 0.65;
@@ -1248,9 +1316,9 @@ const mouseWheel = new THREE.Mesh(new THREE.BoxGeometry(1.4, 1.2, 3.4), accentKe
 mouseWheel.position.set(48, 4.4, 17);
 mouseGroup.add(mouseBody, mouseWheel);
 scene.add(mouseGroup);
-registerInteractive(mouseGroup, 'Wireless Mouse · Open Projects', () => transitionTo(true, () => openApp('projects')));
+registerInteractive(mouseGroup, 'Wireless Mouse — Open Projects & Gallery', () => transitionTo(true, () => openApp('projects')));
 
-// Coffee Mug + Steam (Click for Steam Boost!)
+// Coffee Mug + Steam
 const mugGroup = new THREE.Group();
 mugGroup.position.set(-72, 0, 22);
 scene.add(mugGroup);
@@ -1281,13 +1349,13 @@ steamPts.position.set(-72, 17, 22);
 scene.add(steamPts);
 
 let steamBoost = 0;
-registerInteractive(mugGroup, 'Hot Coffee · Click for Fresh Brew', () => {
+registerInteractive(mugGroup, 'Hot Coffee — Click for Fresh Brew', () => {
   steamBoost = 2.0;
   playClick(410, 0.05);
   showToast('Coffee refilled — Ready for Medical AI research!');
 });
 
-// Articulated Desk Lamp (Clickable!)
+// Articulated Desk Lamp
 const lampGroup = new THREE.Group();
 lampGroup.position.set(-96, 0, -28);
 scene.add(lampGroup);
@@ -1306,9 +1374,9 @@ shade.rotation.z = 0.65;
 const bulb = new THREE.Mesh(new THREE.SphereGeometry(3.5, 16, 16), new THREE.MeshBasicMaterial({ color: 0xffd28a }));
 bulb.position.set(27, 54, 10);
 lampGroup.add(lampBase, arm1, arm2, shade, bulb);
-registerInteractive(lampGroup, 'Desk Lamp · Click to Toggle ON/OFF', () => toggleLamp());
+registerInteractive(lampGroup, 'Desk Lamp — Toggle Warm Light', () => toggleLamp());
 
-// Miniature 3D DNA Double Helix with Base-Pair Rungs!
+// Miniature 3D DNA Double Helix with Base-Pair Rungs
 const dnaGroup = new THREE.Group();
 dnaGroup.position.set(-94, 0, -2);
 scene.add(dnaGroup);
@@ -1340,14 +1408,14 @@ for (let i = 0; i < 14; i++) {
   dnaHelix.add(n1, n2, rung);
 }
 let dnaSpeedBoost = 0;
-registerInteractive(dnaGroup, 'Biomedical DNA Helix · Click to Open Research Papers', () => {
+registerInteractive(dnaGroup, 'Biomedical DNA Helix — Open Research & Papers', () => {
   dnaSpeedBoost = 8;
   playClick(680, 0.05);
-  showToast('DNA Research Helix activated — Opening Publications...');
-  setTimeout(() => transitionTo(true, () => openApp('research')), 320);
+  showToast('Opening Research & Publications...');
+  setTimeout(() => transitionTo(true, () => openApp('research')), 300);
 });
 
-// Lab Vial Rack (Next to DNA Helix)
+// Lab Vial Rack
 const vialGroup = new THREE.Group();
 vialGroup.position.set(-112, 0, -2);
 scene.add(vialGroup);
@@ -1362,9 +1430,9 @@ vialGroup.add(rack);
   tube.position.set(-3.5 + idx * 3.5, 7, 0);
   vialGroup.add(tube);
 });
-registerInteractive(vialGroup, 'Bio Lab Vials · Open MedAI Triage Sim', () => transitionTo(true, () => openApp('medaiSim')));
+registerInteractive(vialGroup, 'Bio Lab Vials — Open MedAI Triage Lab', () => transitionTo(true, () => openApp('medaiSim')));
 
-// Small Ceramic Succulent Plant
+// Ceramic Succulent Plant
 const plantGroup = new THREE.Group();
 plantGroup.position.set(-108, 0, 28);
 scene.add(plantGroup);
@@ -1380,12 +1448,12 @@ for (let i = 0; i < 7; i++) {
   leaf.rotation.x = Math.sin(ang) * 0.45;
   plantGroup.add(leaf);
 }
-registerInteractive(plantGroup, 'Desk Plant · Click for Bio Emerald Theme', () => {
+registerInteractive(plantGroup, 'Desk Plant — Switch to Bio Emerald Theme', () => {
   setOsTheme('emerald');
-  showToast('Switched NabilOS wallpaper to Bio Emerald');
+  showToast('Wallpaper switched to Bio Emerald');
 });
 
-// Glass-Side PC Tower with Spinning RGB Fans (Click to Cycle RGB!)
+// Glass-Side PC Tower
 const pcGroup = new THREE.Group();
 pcGroup.position.set(102, 24, -18);
 pcGroup.rotation.y = -0.25;
@@ -1402,7 +1470,7 @@ fan2.rotation.y = Math.PI / 2;
 const gpuBar = new THREE.Mesh(new THREE.BoxGeometry(1.5, 2.2, 22), fan1Mat);
 gpuBar.position.set(-13.1, -1, -6);
 pcGroup.add(pcBody, fan1, fan2, gpuBar);
-registerInteractive(pcGroup, 'AI Workstation Tower · Click to Cycle RGB Lighting', () => cycleRgbTheme());
+registerInteractive(pcGroup, 'Workstation Tower — Cycle RGB Theme', () => cycleRgbTheme());
 
 // Desk Nameplate ("M. G. R. NABIL")
 const plateGroup = new THREE.Group();
@@ -1418,7 +1486,7 @@ const plateFace = new THREE.Mesh(
 plateFace.position.set(0, 0.3, 2.35);
 plateFace.rotation.x = -0.22;
 plateGroup.add(plateBlock, plateFace);
-registerInteractive(plateGroup, 'M. G. R. Nabil · Click for Profile & Awards', () => transitionTo(true, () => openApp('awards')));
+registerInteractive(plateGroup, 'M. G. R. Nabil — View Awards & Honours', () => transitionTo(true, () => openApp('awards')));
 
 // Research Papers Stack + Reference Book
 const paperGroup = new THREE.Group();
@@ -1434,16 +1502,16 @@ book.position.set(67, 5.2, -14);
 book.rotation.y = 0.14;
 paperGroup.add(book);
 scene.add(paperGroup);
-registerInteractive(paperGroup, 'Research Papers Stack · Click to Open DOIs', () => transitionTo(true, () => openApp('research')));
+registerInteractive(paperGroup, 'Research Papers — Open Publications & Abstracts', () => transitionTo(true, () => openApp('research')));
 
 // =========================================================
 // RGB Theme Cycler + Desk Lamp Controls
 // =========================================================
 const RGB_THEMES = [
-  { name: 'Cyan', c1: 0x38bdf8, c2: 0x34d399, os: 'cyan' },
-  { name: 'Violet', c1: 0xa855f7, c2: 0xf43f5e, os: 'indigo' },
-  { name: 'Emerald', c1: 0x10b981, c2: 0x22d3ee, os: 'emerald' },
-  { name: 'Amber', c1: 0xfbbf24, c2: 0xf97316, os: 'cyan' }
+  { name: 'Cyan', c1: 0x38bdf8, c2: 0x34d399 },
+  { name: 'Violet', c1: 0xa855f7, c2: 0xf43f5e },
+  { name: 'Emerald', c1: 0x10b981, c2: 0x22d3ee },
+  { name: 'Amber', c1: 0xfbbf24, c2: 0xf97316 }
 ];
 let rgbIdx = 0;
 function cycleRgbTheme() {
@@ -1521,7 +1589,7 @@ function transitionTo(toMonitor, afterDock) {
   const hint = document.getElementById('hintText');
   if (toMonitor) {
     btn.textContent = '← Back to 3D Desk (Esc)';
-    hint.textContent = 'Crisp HD NabilOS · Drag windows, test MedAI Sim, browse 7 screenshots, or press Esc';
+    hint.textContent = 'HD Display Active · Explore full research details, MedAI screenshots & interactive tools, or press Esc';
   } else {
     btn.textContent = 'Focus Monitor Screen ↗';
     hint.textContent = 'Drag to orbit · Scroll to zoom · Click monitor, lamp, DNA, posters, keyboard, PC, or mug!';
@@ -1565,10 +1633,7 @@ document.getElementById('audioBtn').addEventListener('click', e => {
   if (sfxEnabled) playClick(620);
 });
 
-// =========================================================
-// Bulletproof 3D Click + Hover Raycasting
-// (Works cleanly alongside OrbitControls pointer capture!)
-// =========================================================
+// Capture-phase 3D Click + Hover Raycasting
 const raycaster = new THREE.Raycaster();
 const pointerNDC = new THREE.Vector2();
 let downInfo = null;
@@ -1581,7 +1646,6 @@ function raycastAt(clientX, clientY) {
   return hits.length ? hits[0].object : null;
 }
 
-// Capture-phase pointerdown ensures we know if click started on #screen-veil BEFORE OrbitControls captures pointer!
 cssRenderer.domElement.addEventListener('pointerdown', e => {
   if (inMonitorMode) return;
   downInfo = {
@@ -1597,7 +1661,7 @@ cssRenderer.domElement.addEventListener('pointermove', e => {
     return;
   }
   if (e.target.closest('#screen-veil')) {
-    hoverTip.textContent = 'Click Monitor for Crisp HD NabilOS ↗';
+    hoverTip.textContent = 'Click Monitor for Crisp HD View ↗';
     hoverTip.style.left = e.clientX + 'px';
     hoverTip.style.top = e.clientY + 'px';
     hoverTip.classList.add('visible');
@@ -1622,7 +1686,7 @@ cssRenderer.domElement.addEventListener('pointerup', e => {
   const dist = Math.hypot(e.clientX - downInfo.x, e.clientY - downInfo.y);
   const startedOnVeil = downInfo.onVeil;
   downInfo = null;
-  if (dist > 8) return; // Was a camera orbit drag, not a click
+  if (dist > 8) return;
 
   if (startedOnVeil) {
     transitionTo(true);
@@ -1698,13 +1762,13 @@ function animate() {
 animate();
 
 // =========================================================
-// NabilOS Desktop Window Manager & Interactive Apps
+// Portfolio Desktop Manager & Comprehensive Content Sections
 // =========================================================
 const bootScreen = document.getElementById('boot-screen');
 const bootFill = document.getElementById('bootFill');
 setTimeout(() => { bootFill.style.width = '100%'; }, 60);
 const finishBoot = () => bootScreen.classList.add('hidden');
-setTimeout(finishBoot, 850);
+setTimeout(finishBoot, 800);
 bootScreen.addEventListener('click', finishBoot);
 
 const desktop = document.getElementById('desktop');
@@ -1715,23 +1779,53 @@ const osClock = document.getElementById('osClock');
 const lb = document.getElementById('shot-lightbox');
 const lbImg = document.getElementById('lbImg');
 const lbCap = document.getElementById('lbCaption');
+const lbDesc = document.getElementById('lbDesc');
 
 const MEDAI_SHOTS = [
-  ['./assets/screenshots/medai-landing.png', '1/7 · MedAI Hospital Landing & Biometric Auth'],
-  ['./assets/screenshots/medai-3d-anatomy.png', '2/7 · Interactive 3D Anatomy Pain Mapper'],
-  ['./assets/screenshots/medai-assistant.png', '3/7 · MedAI Bilingual Health Assistant'],
-  ['./assets/screenshots/medai-prescriptions.png', '4/7 · Signed Digital Prescriptions & PDF'],
-  ['./assets/screenshots/medai-reports.png', '5/7 · AI Medical Report Upload & Analysis'],
-  ['./assets/screenshots/medai-appointments.png', '6/7 · Doctor & Patient Appointments'],
-  ['./assets/screenshots/medai-nearby.png', '7/7 · Nearby Healthcare & Map Lookup']
+  [
+    './assets/screenshots/medai-landing.png',
+    '1/7 · MedAI Hospital Landing & Biometric Auth',
+    'Main entry portal featuring Patient & Doctor login pathways, biometric authentication support, emergency quick-access cues, and safety-oriented health-information design.'
+  ],
+  [
+    './assets/screenshots/medai-3d-anatomy.png',
+    '2/7 · Interactive 3D Anatomy Pain Mapper',
+    'Interactive 3D anatomical symptom selector enabling patients to pinpoint pain regions visually and supply structured clinical context prior to consultation.'
+  ],
+  [
+    './assets/screenshots/medai-assistant.png',
+    '3/7 · MedAI Bilingual Health Assistant',
+    'Safety-first conversational health-information assistant supporting bilingual (English & Bengali) interaction, red-flag escalation, and visit-preparation summaries.'
+  ],
+  [
+    './assets/screenshots/medai-prescriptions.png',
+    '4/7 · Signed Digital Prescriptions & PDF Export',
+    'Doctor-issued digital prescription workflow with structured medication schedules, verification signatures, and downloadable PDF output.'
+  ],
+  [
+    './assets/screenshots/medai-reports.png',
+    '5/7 · AI Medical Report Upload & Analysis',
+    'Diagnostic document and lab report upload module with plain-language explanations, safety screening rules, and key biomarker highlights.'
+  ],
+  [
+    './assets/screenshots/medai-appointments.png',
+    '6/7 · Doctor & Patient Appointments',
+    'Unified scheduling interface coordinating patient booking requests, consultation slots, and doctor verification dashboards.'
+  ],
+  [
+    './assets/screenshots/medai-nearby.png',
+    '7/7 · Nearby Healthcare & Map Lookup',
+    'Geolocation-assisted healthcare directory helping users locate nearby clinics, hospitals, and emergency care services.'
+  ]
 ];
 
 let currentShotIdx = 0;
 function openLightboxByIndex(idx) {
   currentShotIdx = (idx + MEDAI_SHOTS.length) % MEDAI_SHOTS.length;
-  const [src, cap] = MEDAI_SHOTS[currentShotIdx];
+  const [src, cap, desc] = MEDAI_SHOTS[currentShotIdx];
   lbImg.src = src;
   lbCap.textContent = cap;
+  lbDesc.textContent = desc;
   lb.classList.add('open');
   playClick(640);
 }
@@ -1776,269 +1870,375 @@ const PAPERS = [
   {
     date: '16 Nov 2026 · Journal Record',
     title: 'MedAI: A Safety-Oriented Health-Information Prototype for Symptom Context, Biomedical Retrieval, and Clinician-Visit Preparation',
-    venue: 'Internet Medical Journal',
+    venue: 'Internet Medical Journal — Formal journal record documenting the MedAI architecture.',
     links: [['DOI / Publication Record ↗', 'https://doi.org/10.5281/ZENODO.24269016']],
-    abstract: 'Introduces a safety-first patient health-information architecture combining symptom structuring, curated biomedical retrieval, red-flag escalation, and structured visit-summary generation.',
+    explanation: 'Presents a safety-oriented patient health-information system designed around strict clinical boundaries rather than automated diagnosis. Combines structured symptom-context capture, curated biomedical literature retrieval, deterministic red-flag escalation rules, and structured pre-visit summaries so patients arrive at clinician consultations better prepared.',
     cite: 'Nabil, M. G. R. (2026). MedAI: A Safety-Oriented Health-Information Prototype for Symptom Context, Biomedical Retrieval, and Clinician-Visit Preparation. Internet Medical Journal. https://doi.org/10.5281/ZENODO.24269016'
   },
   {
-    date: '5 Nov 2026 · Preprint',
-    title: 'Recombinant DNA Topoisomerases for Biomedical Research and Pharmaceutical Discovery',
-    venue: 'Expression platforms, functional assays, and translational applications.',
+    date: '5 Nov 2026 · Preprint (Two Platform Records)',
+    title: 'Recombinant DNA Topoisomerases for Biomedical Research and Pharmaceutical Discovery: Expression Platforms, Functional Assays, and Translational Applications',
+    venue: 'Archived on Cambridge Open Engage & ScienceOpen Preprints (grouped here as one distinct study).',
     links: [
       ['Cambridge Open Engage ↗', 'https://doi.org/10.33774/coe-2026-1r5hw'],
-      ['ScienceOpen ↗', 'https://doi.org/10.14293/PR2199.004798.v1']
+      ['ScienceOpen Preprints ↗', 'https://doi.org/10.14293/PR2199.004798.v1']
     ],
-    abstract: 'Reviews recombinant expression workflows, relaxation/cleavage assays, and antimicrobial & anticancer drug-screening strategies targeting DNA topoisomerases.',
-    cite: 'Nabil, M. G. R. (2026). Recombinant DNA Topoisomerases for Biomedical Research and Pharmaceutical Discovery. Cambridge Open Engage. https://doi.org/10.33774/coe-2026-1r5hw'
+    explanation: 'Examines recombinant expression platforms (prokaryotic and eukaryotic systems), enzymatic relaxation and cleavage-complex functional assays, and translational pharmaceutical discovery pipelines targeting Type I and Type II DNA topoisomerases for antimicrobial and anticancer therapeutics.',
+    cite: 'Nabil, M. G. R. (2026). Recombinant DNA Topoisomerases for Biomedical Research and Pharmaceutical Discovery: Expression Platforms, Functional Assays, and Translational Applications. Cambridge Open Engage. https://doi.org/10.33774/coe-2026-1r5hw'
   },
   {
     date: '28 Oct 2026 · Repository Record',
     title: 'MedAI: A Safety-Oriented Health Information Prototype',
-    venue: 'Earlier Zenodo record for the MedAI research work.',
+    venue: 'Earlier Zenodo repository record for the foundational MedAI research work.',
     links: [['Zenodo Record ↗', 'https://doi.org/10.5281/ZENODO.23742165']],
-    abstract: 'Foundational repository artifact documenting MedAI system boundaries, bilingual patient workflows, and safety guardrails.',
+    explanation: 'Establishes the foundational system design, bilingual English–Bengali accessibility workflows, and explicit safety guardrails ensuring AI health guidance clearly communicates uncertainty and directs urgent symptoms to qualified medical care.',
     cite: 'Nabil, M. G. R. (2026). MedAI: A Safety-Oriented Health Information Prototype. Zenodo. https://doi.org/10.5281/ZENODO.23742165'
   },
   {
     date: '15 Oct 2026 · Preprint',
-    title: 'ReportSimple V3: Privacy-Preserving AI Framework for Multimodal Medical Report Analysis',
-    venue: 'Rule-based safety screening and interactive 3D symptom mapping.',
-    links: [['Cambridge Open Engage ↗', 'https://doi.org/10.33774/coe-2026-kpmvn']],
-    abstract: 'Presents a privacy-oriented multimodal diagnostic-report parser that maps lab markers to plain-language guidance and 3D anatomical context.',
-    cite: 'Nabil, M. G. R. (2026). ReportSimple V3: Privacy-Preserving AI Framework for Multimodal Medical Report Analysis. Cambridge Open Engage. https://doi.org/10.33774/coe-2026-kpmvn'
+    title: 'ReportSimple V3: An Integrated, Privacy-Preserving AI Framework for Multimodal Medical Report Analysis, Rule-Based Safety Screening, and Interactive 3D Symptom Mapping',
+    venue: 'Cambridge Open Engage preprint record.',
+    links: [['Cambridge Open Engage Record ↗', 'https://doi.org/10.33774/coe-2026-kpmvn']],
+    explanation: 'Introduces a privacy-preserving multimodal framework that parses diagnostic lab and imaging reports into understandable explanations, layers deterministic rule-based safety screening over model outputs, and pairs findings with an interactive 3D anatomical symptom mapper.',
+    cite: 'Nabil, M. G. R. (2026). ReportSimple V3: An Integrated, Privacy-Preserving AI Framework for Multimodal Medical Report Analysis, Rule-Based Safety Screening, and Interactive 3D Symptom Mapping. Cambridge Open Engage. https://doi.org/10.33774/coe-2026-kpmvn'
   },
   {
     date: '8 Oct 2026 · Repository Record',
-    title: 'Artificial Intelligence in Early Disease Detection',
-    venue: 'Diagnostic performance, clinical applications, bias, explainability, and responsible governance.',
+    title: 'Artificial Intelligence in Early Disease Detection: Diagnostic Performance, Clinical Applications, Bias, Explainability, and Responsible Governance',
+    venue: 'Zenodo repository record.',
     links: [['Zenodo Record ↗', 'https://doi.org/10.5281/ZENODO.23245696']],
-    abstract: 'Synthesizes early-detection AI benchmarks across imaging and clinical tabular data while examining calibration, fairness, and clinician oversight.',
-    cite: 'Nabil, M. G. R. (2026). Artificial Intelligence in Early Disease Detection. Zenodo. https://doi.org/10.5281/ZENODO.23245696'
+    explanation: 'Reviews diagnostic performance metrics across imaging and clinical tabular screening models while analyzing dataset bias, calibration drift, explainability methods, and responsible governance requirements necessary before real-world clinical deployment.',
+    cite: 'Nabil, M. G. R. (2026). Artificial Intelligence in Early Disease Detection: Diagnostic Performance, Clinical Applications, Bias, Explainability, and Responsible Governance. Zenodo. https://doi.org/10.5281/ZENODO.23245696'
   }
 ];
 
 const SIM_DATA = {
   head: {
     region: 'Head & Neurological Context',
-    questions: ['Onset speed (sudden thunderclap vs gradual)?', 'Visual changes, photophobia, or neck stiffness?', 'Hydration, sleep, and blood pressure history?'],
-    redFlags: 'Sudden severe headache, focal weakness, confusion, or fever with stiff neck requires immediate emergency evaluation.',
-    prep: 'Log exact onset time, pain scale (1-10), and current medications before visiting your physician.'
+    questions: [
+      'Onset speed: did discomfort begin suddenly (seconds/minutes) or build gradually over hours?',
+      'Any associated visual disturbances, light sensitivity (photophobia), or neck stiffness?',
+      'Recent hydration status, sleep changes, or blood-pressure readings?'
+    ],
+    redFlags: 'Sudden "thunderclap" severe headache, focal numbness/weakness, slurred speech, confusion, or high fever with stiff neck requires immediate emergency evaluation.',
+    prep: 'Record exact onset time, pain intensity (1–10), triggers, and all current medications before visiting your clinician.'
   },
   chest: {
     region: 'Chest & Cardiorespiratory Context',
-    questions: ['Does discomfort worsen with exertion or deep breathing?', 'Shortness of breath, sweating, or radiation to jaw/arm?', 'Recent respiratory infection or fever?'],
-    redFlags: 'Crushing chest pressure, breathlessness at rest, fainting, or radiating pain requires urgent emergency care.',
-    prep: 'Keep prior ECG/CXR reports and blood-pressure readings ready for clinician review.'
+    questions: [
+      'Does discomfort intensify with physical exertion, deep inspiration, or lying flat?',
+      'Any accompanying shortness of breath, cold sweats, palpitations, or pain radiating to jaw/left arm?',
+      'Recent respiratory infection, fever, or prolonged immobility?'
+    ],
+    redFlags: 'Crushing or squeezing chest pressure, breathlessness at rest, fainting, or radiating discomfort requires urgent emergency medical care.',
+    prep: 'Bring prior ECGs, chest imaging, lipid/cardiac lab history, and home blood-pressure logs to your appointment.'
   },
   abdomen: {
-    region: 'Abdominal & GI Context',
-    questions: ['Exact quadrant localization (RLQ, epigastric, diffuse)?', 'Relationship to meals, nausea, or bowel changes?', 'Fever or persistent inability to keep fluids down?'],
-    redFlags: 'Rigid abdomen, persistent vomiting, high fever, or GI bleeding requires prompt medical attention.',
-    prep: 'Note meal timing, symptom duration, and any recent antibiotics or NSAID use.'
+    region: 'Abdominal & Gastrointestinal Context',
+    questions: [
+      'Exact anatomical localization (right lower quadrant, upper epigastric, or diffuse cramping)?',
+      'Relationship to meals, nausea/vomiting, or recent changes in bowel habits?',
+      'Presence of fever, jaundice, or inability to keep oral fluids down?'
+    ],
+    redFlags: 'Board-like abdominal rigidity, persistent vomiting, high fever, fainting, or gastrointestinal bleeding requires prompt emergency assessment.',
+    prep: 'Note meal timing, symptom duration, hydration intake, and any recent NSAID or antibiotic usage.'
   },
   msk: {
     region: 'Musculoskeletal & Joint Context',
-    questions: ['History of trauma, twisting injury, or repetitive strain?', 'Joint swelling, warmth, or restricted range of motion?', 'Morning stiffness duration?'],
-    redFlags: 'Inability to bear weight, visible deformity, numbness, or hot swollen joint with fever warrants urgent assessment.',
-    prep: 'Document movements that trigger or relieve pain and bring any prior X-ray/MRI reports.'
+    questions: [
+      'Any history of acute trauma, twisting injury, fall, or repetitive mechanical strain?',
+      'Visible joint swelling, warmth, redness, or restricted active range of motion?',
+      'Duration of morning stiffness and whether movement improves or worsens pain?'
+    ],
+    redFlags: 'Inability to bear weight, visible joint deformity, distal numbness/tingling, or a hot swollen joint with fever warrants urgent clinical evaluation.',
+    prep: 'Document specific movements that provoke or relieve symptoms and bring any prior X-ray or MRI reports.'
   }
 };
 
+const AWARDS_LIST = [
+  ['Runner-up, Web Dev Open Track (18+)', 'International Digital Coding Competition · Nov 2026', 'Awarded Runner-up in the 18+ Open Web Development track for full-stack architecture, interactive user experience, and production engineering execution.'],
+  ['AI Data Harness Solution Developer', 'Open Agent Hackathon, Zetaris × SpaceXSI · Nov 2026', 'Recognized for building an AI data-harness workflow enabling structured retrieval and agent orchestration across heterogeneous datasets.'],
+  ['Qualification-round participant', 'International Physics Competition 2026 · Nov 2026', 'Completed quantitative analytical and theoretical physics problem sets in the international qualification stage.'],
+  ['Scholarship award', 'Immerse Education Essay Competition · Nov 2026', 'Awarded scholarship recognition for academic essay writing demonstrating structured research reasoning and clarity.'],
+  ['307th of 43,023 participants', 'All-Russian Olympiad in Artificial Intelligence · Oct 2026', 'Placed in the top ~0.7% globally (307th out of 43,023 competitors) solving algorithmic machine-learning and AI reasoning challenges.'],
+  ['Participant with ReportSimple', 'ForgeHacks Online 2026 · Oct 2026', 'Presented ReportSimple, a privacy-conscious AI system for multimodal medical report comprehension and rule-based safety screening.'],
+  ['Participant, AI agents track', 'GenAI Open Agent Hackathon · Oct 2026', 'Built and tested multi-step tool-using AI agent workflows with structured guardrails in the AI Agents competition track.'],
+  ['Peak team rank: Silver', 'Cambridge Battlecode · Autumn 2026', 'Reached Silver tier peak ranking in Cambridge Battlecode competitive AI strategy programming.'],
+  ['Participant', 'Banana Hacks · 2026', 'Collaborated on rapid software prototyping under hackathon time constraints.'],
+  ['Startup-Smart assessment: 9/10', 'UPFORGE Startup Intelligence Platform · Sep 2026', 'Achieved a 9/10 Startup-Smart evaluation score for problem definition, technical feasibility, and healthcare product strategy.'],
+  ['Praiseworthy position', 'International Creative Writing Contest · May 2025', 'Honored with a Praiseworthy distinction in an international English creative writing competition.'],
+  ['3rd place, Quran Tilawat', 'NCPSC Inter House Cultural Competition · 2024', 'Secured 3rd place representing house competition at Nirjhor Cantonment Public School & College.'],
+  ['Online selection winner, secondary category', 'Bangladesh Mathematical Olympiad · 2023', 'Selected as an online winner in the Secondary category of the national Bangladesh Mathematical Olympiad.']
+];
+
 const APPS = {
   about: {
-    title: 'About_Me.app — Md Gausur Rahman Nabil',
-    w: 635, h: 460, x: 120, y: 26,
+    title: 'About Me — Md Gausur Rahman Nabil',
+    tab: 'About Me',
+    w: 710, h: 495, x: 96, y: 20,
     html: `
+      <div class="section-cover about-cover">
+        <span class="meta-label" style="color:#7dd3fc">Academic &amp; Engineering Cover · Bangladesh</span>
+        <h3>Md Gausur Rahman Nabil — Researcher &amp; Full-Stack Software Developer</h3>
+        <p>Exploring how responsible artificial intelligence, biomedical research, cybersecurity, and full-stack software engineering can work together to make healthcare information safer, clearer, and more accessible.</p>
+      </div>
       <div class="about-grid">
-        <img class="about-photo" src="./md-gausur-rahman-nabil.jpg" alt="Md Gausur Rahman Nabil">
+        <img class="about-photo" src="./md-gausur-rahman-nabil.jpg" alt="Portrait of Md Gausur Rahman Nabil">
         <div>
-          <span class="meta-label">Researcher &amp; Software Developer · Bangladesh</span>
-          <h3 style="margin:4px 0 8px;font-size:21px;color:#fff">Md Gausur Rahman Nabil</h3>
-          <p style="margin:0 0 10px;color:#cbd5e1">Independent researcher and full-stack developer exploring medical artificial intelligence, biomedical research, cybersecurity, and responsible healthcare tools.</p>
+          <span class="meta-label">Research Profile &amp; Security Mission · Dhaka, Bangladesh (Hybrid · Remote)</span>
+          <p style="margin:6px 0 10px;color:#e2e8f0">I am a dedicated and multi-certified cybersecurity professional, AI researcher, and full-stack developer from Bangladesh combining hands-on expertise in <strong>threat intelligence, ransomware protection, critical infrastructure security (OPSWAT ICIP), and network administration</strong> with <strong>medical artificial intelligence and biomedical research</strong>.</p>
+          <p style="margin:0 0 10px;color:#cbd5e1">My work explores how digital systems can support patient health-information access, medical-report understanding, and structured preparation for clinician consultations while communicating AI capabilities and safety limits transparently.</p>
           <div class="tag-list">
             <span class="tag-chip">Medical AI</span>
             <span class="tag-chip">Biomedical Research</span>
-            <span class="tag-chip">Responsible AI</span>
-            <span class="tag-chip">Cybersecurity</span>
-            <span class="tag-chip">Full-Stack Dev</span>
+            <span class="tag-chip">Threat Intelligence &amp; CRPO</span>
+            <span class="tag-chip">Critical Infrastructure (ICIP)</span>
+            <span class="tag-chip">Full-Stack Development</span>
+            <span class="tag-chip">Digital Marketing</span>
           </div>
           <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
             <button class="os-filter active" data-jump="projects">MedAI Screenshots (7) ↗</button>
-            <button class="os-filter" data-jump="research">Publications (5)</button>
-            <button class="os-filter" data-jump="contact">Email Nabil</button>
+            <button class="os-filter" data-jump="research">Research Papers (5)</button>
+            <a class="os-filter" href="./Md-Gausur-Rahman-Nabil-3D-Interactive-Portfolio.pdf" target="_blank" rel="noopener" style="text-decoration:none">Download 3D Portfolio PDF ↗</a>
           </div>
         </div>
       </div>
       <div class="item-card" style="margin-top:16px">
-        <span class="meta-label">Education</span>
-        <h4>HSC (Science), 2025 — Nirjhor Cantonment Public School &amp; College (GPA 4.42)</h4>
-        <p>SSC, 2023 — Tamirul Millat Kamil Madrasah (GPA 4.94)</p>
+        <span class="meta-label">Professional Experience</span>
+        <h4>Marketing Assistant — Craftly (Full-time · Mar 2026 – May 2026 · 3 mos)</h4>
+        <p>Dhaka, Bangladesh (Remote) · Contributed to artificial intelligence product initiatives, growth strategy, and outreach for the <strong>Craftly Robot</strong> homegrown AI ecosystem aimed at expanding local AI opportunities in Bangladesh.</p>
+        <h4 style="margin-top:10px">Media Buyer — admastery (Full-time · Mar 2026 – Apr 2026 · 2 mos)</h4>
+        <p>United States (Remote) · Managed paid digital media campaigns, audience strategy, account management, market research, and client communication across performance advertising channels.</p>
       </div>
       <div class="item-card">
-        <span class="meta-label">Verified Profiles &amp; Portfolio Modes</span>
-        <p style="margin-top:4px;line-height:1.9">
-          <a href="https://orcid.org/0009-0001-3110-0640" target="_blank" rel="noopener">ORCID ↗</a> &nbsp;·&nbsp;
-          <a href="https://scholar.google.com/citations?user=iJNaglwAAAAJ" target="_blank" rel="noopener">Google Scholar ↗</a> &nbsp;·&nbsp;
-          <a href="https://github.com/nabilgr847" target="_blank" rel="noopener">GitHub ↗</a> &nbsp;·&nbsp;
-          <a href="./simple.html">Open 2D Academic View ↗</a>
+        <span class="meta-label">Education &amp; Languages</span>
+        <h4>Higher Secondary Certificate (HSC), Science — Oct 2023 – Jun 2025</h4>
+        <p><strong>Nirjhor Cantonment Public School and College</strong> · GPA 4.42<br>Science track covering mathematics, physics, chemistry, and biology supporting biomedical &amp; AI modeling.</p>
+        <h4 style="margin-top:10px">Secondary School Certificate (SSC), Science — 2023</h4>
+        <p><strong>Tamirul Millat Kamil Madrasah</strong> · GPA 4.94<br>Graduated with strong academic distinction across core sciences and analytical subjects.</p>
+        <p style="margin-top:8px"><strong>Languages (5):</strong> Bangla (Native/Bilingual) · English (Full Professional) · Arabic (Limited Working) · Russian (Introductory Phonetics, RUDN University).</p>
+        <p style="margin:4px 0 0;font-size:12px;color:#94a3b8">Academic details are presented as supplied; supporting documents can be provided where required.</p>
+      </div>
+      <div class="item-card">
+        <span class="meta-label">Research Identifiers &amp; Portfolio Modes</span>
+        <p style="margin-top:6px;line-height:2">
+          • <strong>ORCID:</strong> <a href="https://orcid.org/0009-0001-3110-0640" target="_blank" rel="noopener">0009-0001-3110-0640 ↗</a><br>
+          • <strong>Google Scholar:</strong> <a href="https://scholar.google.com/citations?user=iJNaglwAAAAJ" target="_blank" rel="noopener">View Citations &amp; Profile ↗</a><br>
+          • <strong>GitHub:</strong> <a href="https://github.com/nabilgr847" target="_blank" rel="noopener">github.com/nabilgr847 ↗</a><br>
+          • <strong>2D Academic Reader:</strong> <a href="./simple.html">Open Clean 2D Academic Portfolio ↗</a>
         </p>
       </div>
     `
   },
   projects: {
-    title: 'Projects.app — MedAI Hospital Gallery & Builds',
-    w: 690, h: 495, x: 145, y: 34,
+    title: 'Projects & MedAI Gallery — Builds & Explanations',
+    tab: 'Projects',
+    w: 730, h: 510, x: 115, y: 24,
     html: `
+      <div class="section-cover projects-cover">
+        <span class="meta-label" style="color:#6ee7b7">Engineering Showcase · 6 Projects &amp; 7 Live MedAI Screenshots</span>
+        <h3>Healthcare AI Systems &amp; Full-Stack Web Applications</h3>
+        <p>From full-stack clinical portal concepts like MedAI Hospital and ReportSimple V3 to Python medical-AI experiments and modern JavaScript web engineering.</p>
+      </div>
       <div class="os-filters">
-        <button class="os-filter active" data-pcat="all">All Projects (6)</button>
-        <button class="os-filter" data-pcat="health">Healthcare AI</button>
-        <button class="os-filter" data-pcat="web">Web &amp; Full-Stack</button>
+        <button class="os-filter active" data-pcat="all">All Projects (8)</button>
+        <button class="os-filter" data-pcat="health">Healthcare AI (3)</button>
+        <button class="os-filter" data-pcat="web">Production Web &amp; Full-Stack (5)</button>
       </div>
       <div class="item-card p-card" data-pcat="health">
-        <span class="meta-label">Flagship Healthcare Application · Click any screenshot for HD Viewer</span>
-        <h4>MedAI Hospital</h4>
-        <p>Full-stack healthcare platform with patient &amp; doctor portals, bilingual MedAI Assistant, interactive 3D anatomy symptom mapping, AI report analysis, signed prescriptions, and biometric login.</p>
-        <a href="https://medaionline-1.onrender.com" target="_blank" rel="noopener">Open Application ↗</a> &nbsp;·&nbsp;
-        <a href="https://github.com/nabilgr847/MedAI-Hospital-Updated" target="_blank" rel="noopener">Source Repository ↗</a>
+        <span class="meta-label">Flagship Healthcare Application · Live Portal, Android APK &amp; 7 Screenshots</span>
+        <h4>MedAI Hospital — AI-Powered Healthcare Assistant &amp; Portal</h4>
+        <p>A Bangladesh-focused AI-powered healthcare platform supporting <strong>Bangla and English communication</strong>, AI symptom assessment with follow-up questions, medicine search with references, report analysis, <strong>Patient, Doctor &amp; Admin role-based dashboards</strong>, audio &amp; video consultations, <strong>3D anatomy pain mapping</strong>, signed PDF prescriptions, and biometric login—designed strictly to support, not replace, qualified clinicians.</p>
+        <p style="margin-bottom:10px">
+          <a href="https://medaionline-1.onrender.com/#portal" target="_blank" rel="noopener">Open Live Portal ↗</a> &nbsp;·&nbsp;
+          <a href="https://github.com/nabilgr847/MedAI-Hospital-Updated" target="_blank" rel="noopener">Source Repository ↗</a> &nbsp;·&nbsp;
+          <a href="https://github.com/nabilgr847/Medaionline/releases/download/apk-latest/MedAI-Hospital.apk" target="_blank" rel="noopener">Download Android APK ↗</a>
+        </p>
         <div class="shot-grid">
-          ${MEDAI_SHOTS.map(([src, cap], idx) => `
+          ${MEDAI_SHOTS.map(([src, cap, desc], idx) => `
             <button class="shot-thumb" data-shot-idx="${idx}">
               <img src="${src}" alt="${cap}" loading="lazy">
-              <span>${cap}</span>
+              <strong>${cap}</strong>
+              <span>${desc.slice(0, 78)}...</span>
             </button>
           `).join('')}
         </div>
       </div>
       <div class="item-card p-card" data-pcat="health">
-        <span class="meta-label">Healthcare Application</span>
-        <h4>ReportSimple V3</h4>
-        <p>Prototype for multimodal medical-report analysis, rule-based safety screening, and interactive 3D symptom mapping.</p>
-        <a href="https://reportsimple-v3.onrender.com" target="_blank" rel="noopener">Open Application ↗</a>
+        <span class="meta-label">Healthcare AI Framework · Deterministic + 3D WebGL + OCR</span>
+        <h4>ReportSimple V3 — Privacy-Preserving Medical Report &amp; Symptom Analyzer</h4>
+        <p>Bridges complex medical reports and patient comprehension via a <strong>Deterministic Rule Engine</strong> (decoupling clinical reference-range evaluations from LLMs to eliminate hallucinations), an <strong>Interactive Three.js WebGL 3D Body Map</strong>, real-time red-flag safety interception, and multimodal OCR integration using <code>pdfplumber</code> and <code>pytesseract</code>.</p>
+        <a href="https://reportsimple-v3.onrender.com" target="_blank" rel="noopener">Open Live Application ↗</a>
       </div>
       <div class="item-card p-card" data-pcat="health">
-        <span class="meta-label">Python · GitHub</span>
-        <h4>Doctor</h4>
-        <p>Medical AI experiments and notebook-based development.</p>
-        <a href="https://github.com/nabilgr847/Doctor" target="_blank" rel="noopener">View Repository ↗</a>
+        <span class="meta-label">Python · Jupyter Notebooks · Medical AI</span>
+        <h4>Doctor — Medical AI Research &amp; Notebook Experiments</h4>
+        <p>Open-source Python repository containing experimental notebooks, data-processing routines, and early medical AI prototypes exploring clinical text handling and diagnostic support workflows.</p>
+        <a href="https://github.com/nabilgr847/Doctor" target="_blank" rel="noopener">View Repository on GitHub ↗</a>
       </div>
       <div class="item-card p-card" data-pcat="web">
-        <span class="meta-label">JavaScript · GitHub</span>
-        <h4>Full Stack Open, Project-1 &amp; Portfolio Builds</h4>
-        <p>Full Stack Open exercises, portfolio builds, and HTML/JS web experiments.</p>
-        <a href="https://github.com/nabilgr847/Project-1" target="_blank" rel="noopener">Project-1 ↗</a> &nbsp;·&nbsp;
-        <a href="https://github.com/nabilgr847/fullstack-hy2020.github.io" target="_blank" rel="noopener">Full Stack Open ↗</a> &nbsp;·&nbsp;
-        <a href="https://github.com/nabilgr847/Portfolio-" target="_blank" rel="noopener">Portfolio ↗</a>
+        <span class="meta-label">Live Production E-Commerce Platform</span>
+        <h4>Irani Borka Bazar (iraniborkabazar.com)</h4>
+        <p>Full-stack production e-commerce web application launched end-to-end with responsive catalog browsing, performance optimization, secure order workflows, and clean user experience.</p>
+        <a href="https://iraniborkabazar.com/" target="_blank" rel="noopener">Visit Live Website ↗</a>
+      </div>
+      <div class="item-card p-card" data-pcat="web">
+        <span class="meta-label">Live Production E-Commerce Platform</span>
+        <h4>ZChoice BD (zchoicebd.com)</h4>
+        <p>Production commercial e-commerce storefront engineered for speed, responsive mobile product discovery, SEO optimization, and seamless customer ordering.</p>
+        <a href="https://zchoicebd.com" target="_blank" rel="noopener">Visit Live Website ↗</a>
+      </div>
+      <div class="item-card p-card" data-pcat="web">
+        <span class="meta-label">JavaScript · React / Full-Stack Engineering</span>
+        <h4>Full Stack Open: Project 1</h4>
+        <p>Structured full-stack engineering exercises and application builds implementing modern JavaScript state management, REST API patterns, and interactive front-end components.</p>
+        <a href="https://github.com/nabilgr847/Project-1" target="_blank" rel="noopener">View Project-1 Repository ↗</a>
+      </div>
+      <div class="item-card p-card" data-pcat="web">
+        <span class="meta-label">Coursework · Full-Stack Web Architecture</span>
+        <h4>Full Stack Open (University of Helsinki Curriculum)</h4>
+        <p>Fork and reference workspace covering modern single-page applications, Node.js backends, GraphQL, TypeScript, and automated testing workflows from the Full Stack Open curriculum.</p>
+        <a href="https://github.com/nabilgr847/fullstack-hy2020.github.io" target="_blank" rel="noopener">View Full Stack Open Repository ↗</a>
+      </div>
+      <div class="item-card p-card" data-pcat="web">
+        <span class="meta-label">HTML · CSS · JavaScript Experiments</span>
+        <h4>Web Development Practice &amp; Portfolio Builds</h4>
+        <p>A collection of web-design studies, responsive layout prototypes, and front-end experiments created while iterating on personal portfolio interfaces and interactive UI concepts.</p>
+        <a href="https://github.com/nabilgr847/Portfolio-" target="_blank" rel="noopener">Portfolio Repository ↗</a> &nbsp;·&nbsp;
+        <a href="https://github.com/nabilgr847/Html" target="_blank" rel="noopener">HTML Repository ↗</a> &nbsp;·&nbsp;
+        <a href="https://github.com/nabilgr847/New-Project" target="_blank" rel="noopener">Web Experiments ↗</a>
       </div>
     `
   },
   research: {
-    title: 'Research.pdf — Selected Publications & Preprints (5)',
-    w: 660, h: 465, x: 165, y: 42,
-    html: PAPERS.map((p, idx) => `
-      <div class="item-card">
-        <span class="meta-label">${p.date}</span>
-        <h4>${p.title}</h4>
-        <p>${p.venue}</p>
-        <div class="paper-abs" style="display:none;background:#0a1322;padding:9px 11px;border-radius:6px;margin:8px 0;font-size:12.8px;color:#cbd5e1;border-left:3px solid #38bdf8">${p.abstract}</div>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:6px">
-          ${p.links.map(([lbl, url]) => `<a href="${url}" target="_blank" rel="noopener">${lbl}</a>`).join(' · ')}
-          <button class="copy-btn toggle-abs">Abstract</button>
-          <button class="copy-btn copy-cite" data-idx="${idx}">Copy Citation</button>
-        </div>
+    title: 'Research & Papers — Full Abstracts & DOIs (5 Works)',
+    tab: 'Research',
+    w: 710, h: 495, x: 135, y: 28,
+    html: `
+      <div class="section-cover research-cover">
+        <span class="meta-label" style="color:#7dd3fc">Academic Outputs · 5 Distinct Research Works</span>
+        <h3>Selected Research, Journal Records &amp; Preprints</h3>
+        <p>Where the same research work appears on more than one platform, the records are grouped together to avoid counting a duplicate as a separate study. Publication status should be interpreted according to each destination DOI record.</p>
       </div>
-    `).join('')
+      ${PAPERS.map((p, idx) => `
+        <div class="item-card">
+          <span class="meta-label">${p.date}</span>
+          <h4>${p.title}</h4>
+          <p style="color:#93c5fd;font-size:12.8px;margin-bottom:6px"><em>${p.venue}</em></p>
+          <p>${p.explanation}</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px">
+            ${p.links.map(([lbl, url]) => `<a href="${url}" target="_blank" rel="noopener">${lbl}</a>`).join(' &nbsp;·&nbsp; ')}
+            <button class="copy-btn copy-cite" data-idx="${idx}">Copy Citation</button>
+          </div>
+        </div>
+      `).join('')}
+    `
   },
   medaiSim: {
-    title: 'MedAI_Sim.app — Safety-Oriented Symptom Context Prototype',
-    w: 580, h: 430, x: 185, y: 50,
+    title: 'MedAI Triage Lab — Interactive Symptom Context Prototype',
+    tab: 'MedAI Lab',
+    w: 620, h: 460, x: 165, y: 40,
     html: `
       <div class="item-card">
-        <span class="meta-label">Interactive Research Prototype · Educational Demonstration Only</span>
-        <h4>Structured Clinician-Visit Preparation</h4>
-        <p>Select an anatomical region below to inspect how Nabil's MedAI prototype structures context, safety red flags, and pre-visit notes.</p>
+        <span class="meta-label">Interactive Research Demonstration · Educational Use Only</span>
+        <h4>Safety-Oriented Symptom Context &amp; Clinician-Visit Preparation</h4>
+        <p>Demonstrates the core philosophy behind Md Gausur Rahman Nabil's <strong>MedAI</strong> and <strong>ReportSimple V3</strong> research: rather than offering unsafe automated diagnoses, the system structures anatomical context, surfaces deterministic safety red-flag warnings, and prepares clear questions for a qualified doctor visit.</p>
         <div class="sim-regions">
-          <button class="sim-btn active" data-sim="head">Head &amp; Neuro</button>
-          <button class="sim-btn" data-sim="chest">Chest &amp; Cardio</button>
+          <button class="sim-btn active" data-sim="head">Head &amp; Neurological</button>
+          <button class="sim-btn" data-sim="chest">Chest &amp; Cardiorespiratory</button>
           <button class="sim-btn" data-sim="abdomen">Abdomen &amp; GI</button>
-          <button class="sim-btn" data-sim="msk">Joints &amp; MSK</button>
+          <button class="sim-btn" data-sim="msk">Musculoskeletal &amp; Joints</button>
         </div>
       </div>
       <div class="item-card" id="simOutput"></div>
     `
   },
   awards: {
-    title: 'Awards_13.log — Competitions & Academic Honours',
-    w: 600, h: 445, x: 200, y: 56,
+    title: 'Awards & Honours — 13 Competitions & Distinctions',
+    tab: 'Awards (13)',
+    w: 660, h: 485, x: 155, y: 34,
     html: `
-      <input class="os-search" id="awardSearch" placeholder="Search 13 awards (e.g. Coding, Olympiad, Cambridge, Hackathon)...">
+      <div class="item-card" style="background:#101f36">
+        <span class="meta-label">Competitions, Olympiads, Hackathons &amp; Academic Recognition</span>
+        <p style="margin-bottom:8px">Detailed record of 13 international and national awards, rankings, and hackathon achievements across AI, web development, mathematics, physics, startup intelligence, and writing.</p>
+        <input class="os-search" id="awardSearch" placeholder="Search 13 awards (e.g. Coding, Olympiad, Cambridge, Hackathon, Math)..." style="margin-bottom:0">
+      </div>
       <div id="awardList">
-      ${[
-        ['Runner-up, Web Dev Open Track (18+)', 'International Digital Coding Competition · Nov 2026'],
-        ['AI Data Harness Solution Developer', 'Open Agent Hackathon, Zetaris × SpaceXSI · Nov 2026'],
-        ['Qualification-round participant', 'International Physics Competition 2026 · Nov 2026'],
-        ['Scholarship award', 'Immerse Education Essay Competition · Nov 2026'],
-        ['307th of 43,023 participants', 'All-Russian Olympiad in Artificial Intelligence · Oct 2026'],
-        ['Participant with ReportSimple', 'ForgeHacks Online 2026 · Oct 2026'],
-        ['Participant, AI agents track', 'GenAI Open Agent Hackathon · Oct 2026'],
-        ['Peak team rank: Silver', 'Cambridge Battlecode · Autumn 2026'],
-        ['Participant', 'Banana Hacks · 2026'],
-        ['Startup-Smart assessment: 9/10', 'UPFORGE Startup Intelligence Platform · Sep 2026'],
-        ['Praiseworthy position', 'International Creative Writing Contest · May 2025'],
-        ['3rd place, Quran Tilawat', 'NCPSC Inter House Cultural Competition · 2024'],
-        ['Online selection winner, secondary category', 'Bangladesh Mathematical Olympiad · 2023']
-      ].map(([t, s], idx) => `<div class="item-card award-item"><span class="meta-label">#${String(idx + 1).padStart(2, '0')}</span><h4>${t}</h4><p>${s}</p></div>`).join('')}
+        ${AWARDS_LIST.map(([t, s, desc], idx) => `
+          <div class="item-card award-item">
+            <span class="meta-label">#${String(idx + 1).padStart(2, '0')} · ${s}</span>
+            <h4>${t}</h4>
+            <p>${desc}</p>
+          </div>
+        `).join('')}
       </div>
     `
   },
   credentials: {
-    title: 'Credentials.db — 21 Certifications & Training',
-    w: 650, h: 465, x: 150, y: 42,
+    title: 'Certifications & Learning — 26 Verified Credentials',
+    tab: 'Certifications',
+    w: 680, h: 490, x: 135, y: 32,
     html: `
-      <input class="os-search" id="certSearch" placeholder="Search 21 credentials (e.g. Cisco, Google, Python, Cyber)...">
-      <div class="os-filters">
-        <button class="os-filter active" data-cat="all">All (21)</button>
-        <button class="os-filter" data-cat="security">Cybersecurity</button>
-        <button class="os-filter" data-cat="ai">AI &amp; Data</button>
-        <button class="os-filter" data-cat="development">Development</button>
-        <button class="os-filter" data-cat="skills">Other Skills</button>
+      <div class="item-card" style="background:#101f36">
+        <span class="meta-label">Professional Licenses &amp; Certifications · 26 Credentials</span>
+        <p>Verified industry certifications and formal training across <strong>AI data harnesses, cybersecurity, critical infrastructure protection, networking, software development, communication, and languages</strong>.</p>
+        <input class="os-search" id="certSearch" placeholder="Search 26 credentials (e.g. Zetaris, OPSWAT, Cisco, Google, Python, Cyber)..." style="margin-bottom:10px">
+        <div class="os-filters" style="margin-bottom:0">
+          <button class="os-filter active" data-cat="all">All (26)</button>
+          <button class="os-filter" data-cat="security">Cybersecurity &amp; Net (10)</button>
+          <button class="os-filter" data-cat="ai">AI &amp; Data (6)</button>
+          <button class="os-filter" data-cat="development">Development (3)</button>
+          <button class="os-filter" data-cat="skills">Other Skills (7)</button>
+        </div>
       </div>
       <div id="osCertGrid">
         ${[
-          ['security', 'Certified Cybersecurity Educator Professional (CCEP)', 'Red Team Leaders · Apr 2026'],
-          ['security', 'Certified Ransomware Protection Officer (CRPO)', 'EU Cyber Academy · Apr 2026'],
-          ['security', 'Cyber Threat Intelligence 101', 'arcX'],
-          ['security', 'Introduction to Cybersecurity', 'Cisco Networking Academy · Jan 2026'],
-          ['security', 'Cyber Threat Management', 'Cisco Networking Academy · Jan 2026'],
-          ['security', 'Networking Devices and Initial Configuration', 'Cisco Networking Academy · Jan 2026'],
-          ['security', 'Cyber Security V1', 'DIKKHA Project, ICT Division'],
-          ['security', 'Digital Security Essentials', 'Digital Security Agency, Bangladesh · May 2020'],
-          ['ai', 'Introduction to Generative AI Studio', 'Simplilearn SkillUP / Google Cloud · Jan 2026'],
-          ['ai', 'Gemini Certified Educator', 'Google for Education · 2026–2029'],
-          ['ai', 'Generative AI Literacy', 'SkillQuest · Oct 2026'],
-          ['development', 'Google Play Store Listing Certificate', 'Google Play Academy · Jul 2025'],
-          ['development', 'Python Programming Language', 'DIKKHA Project, ICT Division'],
-          ['development', 'Career Essentials in System Administration', 'Microsoft and LinkedIn Learning · Aug 2024'],
-          ['skills', 'Fundamentals of Digital Marketing', 'Google Digital Unlocked · 2020'],
-          ['skills', 'Google Ads Apps Certification', 'Google · Aug 2025'],
-          ['skills', 'Communication Foundations', 'LinkedIn Learning · Aug 2024'],
-          ['skills', 'Public Speaking Fundamentals', 'Robi 10 Minute School / MuktoPaath'],
-          ['skills', 'COVID-19 Awareness and Prevention', 'BRAC / MuktoPaath'],
-          ['skills', 'Russian language, introductory phonetic course', 'RUDN University'],
-          ['skills', 'International Youth Math Challenge — Certificate', '12 Oct 2026 · <a href="./international-youth-math-challenge-certificate.pdf" target="_blank" rel="noopener">View PDF ↗</a>']
-        ].map(([cat, title, sub]) => `<div class="item-card os-cert" data-cat="${cat}"><h4>${title}</h4><p>${sub}</p></div>`).join('')}
+          ['ai', 'Zetaris × SpaceXSI AI Data Harness Solution Developer', 'Zetaris · Issued Nov 2026 · Credential ID: ZTR-DHSD-4299QY', 'Validated expertise in building enterprise AI data-harness pipelines for structured retrieval and agent orchestration.'],
+          ['ai', 'Zetaris AI Data Harness Solution Developer', 'Zetaris · Issued Nov 2026 · Credential ID: ZTR-DHSD-4299QY', 'Data-harness engineering certification for unified AI data integration across distributed sources.'],
+          ['ai', 'Cisco AI Business Practitioner', 'Cisco Networking Academy', 'Bridges cybersecurity and network governance knowledge with practical artificial intelligence business applications.'],
+          ['security', 'Introduction to Critical Infrastructure Protection (ICIP)', 'OPSWAT', 'Focuses on securing critical infrastructure systems, operational technology defense, and malware prevention.'],
+          ['security', 'Certified Cybersecurity Educator Professional (CCEP)', 'Red Team Leaders · Apr 2026', 'Covers cybersecurity instruction, defensive awareness frameworks, and secure digital practices.'],
+          ['security', 'Certified Ransomware Protection Officer (CRPO)', 'ICTTF – United for Cyber Resilience / EU Cyber Academy · Apr 2026', 'Focuses on ransomware defense, backup resilience, containment protocols, and incident readiness.'],
+          ['security', 'Foundation Level Threat Intelligence Analyst (101)', 'arcX', 'Foundations of threat intelligence collection, IOC analysis, and adversary behavior tracking.'],
+          ['security', 'Introduction to Cybersecurity', 'Cisco Networking Academy · Jan 2026', 'Core principles of network defense, threat landscapes, and organizational security posture.'],
+          ['security', 'Cyber Threat Management', 'Cisco Networking Academy · Jan 2026', 'Governance, risk assessment, vulnerability management, and defensive response planning.'],
+          ['security', 'Networking Basics', 'Cisco Networking Academy', 'Core TCP/IP addressing, Ethernet switching, wireless networking, and protocol troubleshooting.'],
+          ['security', 'Networking Devices and Initial Configuration', 'Cisco Networking Academy · Jan 2026', 'Router/switch configuration, IP addressing, and foundational network infrastructure setup.'],
+          ['security', 'Cyber Security V1', 'DIKKHA Project, ICT Division', 'National ICT training covering practical cyber hygiene and threat prevention.'],
+          ['security', 'Digital Security Essentials', 'Digital Security Agency, Bangladesh · May 2020', 'Foundational training on safe digital operations, identity protection, and cyber awareness.'],
+          ['ai', 'Introduction to Generative AI Studio', 'Simplilearn SkillUP / Google Cloud courses · Jan 2026', 'Prompt engineering, model configuration, and applied generative AI prototyping workflows.'],
+          ['ai', 'Gemini Certified Educator', 'Google for Education · 2026; valid to 2029', 'Certified proficiency in applying Gemini AI tools responsibly for educational research and workflows.'],
+          ['ai', 'Generative AI Literacy', 'SkillQuest · Oct 2026', 'Core concepts of LLM capabilities, hallucination mitigation, and responsible AI evaluation.'],
+          ['development', 'Google Play Store Listing Certificate', 'Google Play Academy · Jul 2025', 'Best practices for compliant app publishing, store metadata, and user-trust policies.'],
+          ['development', 'Python Programming Language', 'DIKKHA Project, ICT Division', 'Structured Python programming for scripting, problem-solving, and AI experimentation.'],
+          ['development', 'Career Essentials in System Administration', 'Microsoft and LinkedIn Learning · Aug 2024', 'Operating systems administration, server maintenance, networking, and enterprise IT fundamentals.'],
+          ['skills', 'Fundamentals of Digital Marketing', 'Google Digital Unlocked · 2020', 'Comprehensive 40-hour training in digital strategy, analytics, and online presence.'],
+          ['skills', 'Google Ads Apps Certification', 'Google · Aug 2025; expired Aug 2026', 'Campaign measurement and mobile application promotion fundamentals.'],
+          ['skills', 'Communication Foundations', 'LinkedIn Learning · Aug 2024', 'Structured written, verbal, and collaborative communication principles.'],
+          ['skills', 'Public Speaking Fundamentals', 'Robi 10 Minute School / MuktoPaath', 'Presentation delivery, audience engagement, and clear technical storytelling.'],
+          ['skills', 'COVID-19 Awareness and Prevention', 'BRAC / MuktoPaath', 'Public-health prevention protocols and community health awareness training.'],
+          ['skills', 'Russian language, introductory phonetic course', 'RUDN University', 'Introductory phonetics and pronunciation training in Russian.'],
+          ['skills', 'International Youth Math Challenge — Participation Certificate', '12 Oct 2026 · <a href="./international-youth-math-challenge-certificate.pdf" target="_blank" rel="noopener">View Official Certificate (PDF) ↗</a>', 'Official international mathematics competition participation certificate.']
+        ].map(([cat, title, sub, desc]) => `
+          <div class="item-card os-cert" data-cat="${cat}">
+            <span class="meta-label">${sub}</span>
+            <h4>${title}</h4>
+            <p>${desc}</p>
+          </div>
+        `).join('')}
       </div>
     `
   },
   terminal: {
-    title: 'Terminal.sh — NabilOS Shell',
-    w: 585, h: 410, x: 215, y: 72,
+    title: 'Command Console — Interactive Portfolio Shell',
+    tab: 'Console',
+    w: 600, h: 425, x: 195, y: 56,
     html: `
       <div class="term-wrap">
         <div class="term-chips">
           ${['neofetch', 'whoami', 'papers', 'projects', 'awards', 'email', 'rgb', 'lamp'].map(c => `<button class="term-chip" data-cmd="${c}">${c}</button>`).join('')}
         </div>
-        <div class="term-output" id="termOut">NabilOS v3.0 Shell — Click any command chip above or type 'help'.\n</div>
+        <div class="term-output" id="termOut">Md Gausur Rahman Nabil — Interactive Portfolio Console\nClick any quick command above or type 'help' to explore.\n</div>
         <div class="term-input-row">
           <span style="color:#38bdf8">nabil@medai:~$</span>
           <input class="term-input" id="termInput" placeholder="type help, neofetch, papers, open projects, rgb, lamp..." autocomplete="off">
@@ -2047,30 +2247,37 @@ const APPS = {
     `
   },
   contact: {
-    title: 'Contact.mail — Direct Email & Message Composer',
-    w: 540, h: 425, x: 225, y: 60,
+    title: 'Contact & Email — Academic Correspondence & Collaboration',
+    tab: 'Contact',
+    w: 580, h: 455, x: 205, y: 42,
     html: `
+      <div class="section-cover contact-cover">
+        <span class="meta-label" style="color:#7dd3fc">Direct Correspondence</span>
+        <h3>Academic &amp; Engineering Collaboration</h3>
+        <p>For research discussions, Medical AI &amp; biomedical collaborations, full-stack projects, or academic opportunities, please reach out via email or connect through the verified profiles below.</p>
+      </div>
       <div class="item-card">
-        <span class="meta-label">Direct Email</span>
-        <h4 style="margin-top:6px">mdgausurrahmannabil@gmail.com</h4>
-        <p style="margin-top:6px">
-          <a href="mailto:mdgausurrahmannabil@gmail.com">Open Mail App ↗</a>
+        <span class="meta-label">Direct Email Addresses</span>
+        <h4 style="margin-top:4px">mdgausurrahmannabil@gmail.com &nbsp;·&nbsp; grnabil459847@gmail.com</h4>
+        <p>Direct correspondence for research inquiries, cybersecurity/AI engineering, internships, and technical collaborations.</p>
+        <p style="margin-bottom:0">
+          <a href="mailto:mdgausurrahmannabil@gmail.com">Open in Email Client ↗</a>
           <button class="copy-btn" id="copyEmailBtn">Copy Email</button>
         </p>
       </div>
       <div class="item-card">
         <span class="meta-label">Quick Message Composer</span>
-        <input class="os-search" id="mailSubj" placeholder="Subject (e.g. Research Collaboration / Internship)" style="margin-top:8px">
-        <textarea class="os-search" id="mailBody" rows="3" placeholder="Write a short message for Md Gausur Rahman Nabil..." style="resize:vertical"></textarea>
+        <input class="os-search" id="mailSubj" placeholder="Subject (e.g. Research Collaboration / MedAI Discussion)" style="margin-top:8px">
+        <textarea class="os-search" id="mailBody" rows="3" placeholder="Write your message for Md Gausur Rahman Nabil..." style="resize:vertical"></textarea>
         <button class="os-filter active" id="sendComposeBtn">Compose in Email Client ↗</button>
       </div>
       <div class="item-card">
-        <span class="meta-label">Academic &amp; Developer Profiles</span>
-        <p style="margin-top:6px;line-height:1.9">
-          <a href="https://github.com/nabilgr847" target="_blank" rel="noopener">GitHub ↗</a> &nbsp;·&nbsp;
-          <a href="https://orcid.org/0009-0001-3110-0640" target="_blank" rel="noopener">ORCID ↗</a> &nbsp;·&nbsp;
-          <a href="https://scholar.google.com/citations?user=iJNaglwAAAAJ" target="_blank" rel="noopener">Google Scholar ↗</a> &nbsp;·&nbsp;
-          <a href="https://www.linkedin.com/in/gausur-rahman-nabil-4ba5b6233" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <span class="meta-label">Verified Academic &amp; Developer Profiles</span>
+        <p style="margin-top:6px;line-height:2">
+          • <strong>GitHub:</strong> <a href="https://github.com/nabilgr847" target="_blank" rel="noopener">github.com/nabilgr847 ↗</a><br>
+          • <strong>ORCID:</strong> <a href="https://orcid.org/0009-0001-3110-0640" target="_blank" rel="noopener">0009-0001-3110-0640 ↗</a><br>
+          • <strong>Google Scholar:</strong> <a href="https://scholar.google.com/citations?user=iJNaglwAAAAJ" target="_blank" rel="noopener">Scholar Profile ↗</a><br>
+          • <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/gausur-rahman-nabil-4ba5b6233" target="_blank" rel="noopener">LinkedIn Profile ↗</a>
         </p>
       </div>
     `
@@ -2119,7 +2326,7 @@ function openApp(id) {
 
   const tab = document.createElement('button');
   tab.className = 'task-tab';
-  tab.textContent = spec.title.split(' ')[0];
+  tab.textContent = spec.tab;
   tab.addEventListener('click', () => {
     const isHidden = win.style.display === 'none';
     if (!isHidden && Number(win.style.zIndex) === topZ) {
@@ -2136,7 +2343,6 @@ function openApp(id) {
 
   win.addEventListener('pointerdown', () => focusWin(id));
 
-  // Pointer-event dragging (works on both desktop mouse & touch!)
   const bar = win.querySelector('.win-titlebar');
   bar.addEventListener('pointerdown', e => {
     if (e.target.closest('.win-btn') || win.classList.contains('maximized')) return;
@@ -2192,14 +2398,6 @@ function openApp(id) {
   }
 
   if (id === 'research') {
-    win.querySelectorAll('.toggle-abs').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const box = btn.closest('.item-card').querySelector('.paper-abs');
-        const open = box.style.display === 'block';
-        box.style.display = open ? 'none' : 'block';
-        btn.textContent = open ? 'Abstract' : 'Hide Abstract';
-      });
-    });
     win.querySelectorAll('.copy-cite').forEach(btn => {
       btn.addEventListener('click', async () => {
         try {
@@ -2218,11 +2416,11 @@ function openApp(id) {
       out.innerHTML = `
         <span class="meta-label">${d.region}</span>
         <h4 style="margin-top:4px">Structured Intake Context</h4>
-        <ul style="margin:6px 0 10px 18px;padding:0;color:#cbd5e1;font-size:13px">
+        <ul style="margin:6px 0 10px 18px;padding:0;color:#cbd5e1;font-size:13.2px;line-height:1.6">
           ${d.questions.map(q => `<li>${q}</li>`).join('')}
         </ul>
-        <p style="color:#fda4af;font-size:12.8px"><strong>Safety Red-Flag Escalation:</strong> ${d.redFlags}</p>
-        <p style="color:#6ee7b7;font-size:12.8px;margin-bottom:0"><strong>Visit Preparation:</strong> ${d.prep}</p>
+        <p style="color:#fda4af;font-size:13px"><strong>Safety Red-Flag Escalation:</strong> ${d.redFlags}</p>
+        <p style="color:#6ee7b7;font-size:13px;margin-bottom:0"><strong>Clinician-Visit Preparation:</strong> ${d.prep}</p>
       `;
     };
     renderSim('head');
@@ -2289,19 +2487,19 @@ function openApp(id) {
       const cmd = raw.trim().toLowerCase();
       out.textContent += `\nnabil@medai:~$ ${cmd}\n`;
       if (cmd === 'help') {
-        out.textContent += `Commands: neofetch, whoami, email, papers, projects, awards, rgb, lamp, desk, clear, open <app>\n`;
+        out.textContent += `Commands: neofetch, whoami, email, papers, projects, awards, rgb, lamp, desk, clear, open <section>\n`;
       } else if (cmd === 'neofetch') {
-        out.textContent += `  NABIL_OS v3.0 (3D WebGL + 1:1 HD Display)\n  User    : Md Gausur Rahman Nabil\n  Focus   : Medical AI · Biomedical · Cybersecurity\n  Papers  : 5 Publications & Preprints\n  Builds  : MedAI Hospital (7 screens), ReportSimple V3\n  Awards  : 13 Honours · 21 Verified Credentials\n`;
+        out.textContent += `  Md Gausur Rahman Nabil — Research Workstation\n  Location : Bangladesh\n  Focus    : Medical AI · Biomedical Research · Cybersecurity\n  Papers   : 5 Publications & Preprints\n  Builds   : MedAI Hospital (7 screens), ReportSimple V3, Doctor, Full Stack Open\n  Awards   : 13 Honours · 21 Verified Certifications\n`;
       } else if (cmd === 'whoami') {
-        out.textContent += `Md Gausur Rahman Nabil — Researcher (Medical AI & Biomedical) & Full-Stack Developer, Bangladesh.\n`;
+        out.textContent += `Md Gausur Rahman Nabil — Researcher (Medical AI & Biomedical) and Full-Stack Software Developer, Bangladesh.\n`;
       } else if (cmd === 'email') {
         out.textContent += `mdgausurrahmannabil@gmail.com\n`;
       } else if (cmd === 'papers') {
-        out.textContent += `5 Research Works:\n - MedAI (Internet Medical Journal, Nov 2026)\n - Recombinant DNA Topoisomerases (Nov 2026)\n - ReportSimple V3 Multimodal AI (Oct 2026)\n - AI in Early Disease Detection (Oct 2026)\n`;
+        out.textContent += `5 Research Works:\n - MedAI (Internet Medical Journal, Nov 2026)\n - Recombinant DNA Topoisomerases (Nov 2026)\n - MedAI Prototype Record (Oct 2026)\n - ReportSimple V3 Multimodal AI (Oct 2026)\n - AI in Early Disease Detection (Oct 2026)\n`;
       } else if (cmd === 'projects') {
-        out.textContent += `Projects: MedAI Hospital, ReportSimple V3, Doctor, Full Stack Open, Portfolio.\n`;
+        out.textContent += `6 Projects: MedAI Hospital, ReportSimple V3, Doctor, Full Stack Open: Project 1, Full Stack Open, Web Practice.\n`;
       } else if (cmd === 'awards') {
-        out.textContent += `13 Awards: Runner-up Int'l Digital Coding Comp, 307/43,023 All-Russian AI Olympiad, Cambridge Battlecode Silver, BD Math Olympiad Winner.\n`;
+        out.textContent += `13 Awards: Runner-up Int'l Digital Coding Comp, 307/43,023 All-Russian AI Olympiad, Cambridge Battlecode Silver, UPFORGE 9/10, BD Math Olympiad Winner.\n`;
       } else if (cmd === 'rgb') {
         cycleRgbTheme();
         out.textContent += `Cycled 3D workstation RGB theme.\n`;
@@ -2315,7 +2513,7 @@ function openApp(id) {
       } else if (cmd.startsWith('open ')) {
         const target = cmd.replace('open ', '').trim();
         if (APPS[target]) openApp(target);
-        else out.textContent += `Unknown app '${target}'. Try: about, research, projects, medaiSim, awards, credentials, contact.\n`;
+        else out.textContent += `Unknown section '${target}'. Try: about, research, projects, medaiSim, awards, credentials, contact.\n`;
       } else if (cmd) {
         out.textContent += `Command not found: ${cmd}. Type 'help'.\n`;
       }
