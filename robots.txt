@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://nabilgr847.github.io/sitemap.xml
