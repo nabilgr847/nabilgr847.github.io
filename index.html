@@ -1,24 +1,19 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#060911">
-<title>Md Gausur Rahman Nabil | 3D Researcher &amp; Developer Workstation</title>
-<meta name="description" content="Interactive 3D portfolio and workstation of Md Gausur Rahman Nabil, researcher and software developer working on medical AI, biomedical research, responsible AI, and cybersecurity.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Md Gausur Rahman Nabil — Interactive 3D Workstation &amp; Portfolio</title>
+<meta name="description" content="Interactive 3D developer workstation and NabilOS portfolio of Md Gausur Rahman Nabil — Researcher in Medical AI, Biomedical Research, Cybersecurity, and Full-Stack Development.">
 <link rel="canonical" href="https://nabilgr847.github.io/">
-<meta property="og:type" content="profile">
-<meta property="og:title" content="Md Gausur Rahman Nabil | 3D Interactive Portfolio">
-<meta property="og:description" content="Explore NabilOS — an interactive 3D research desk and portfolio featuring publications, MedAI Hospital, ReportSimple V3, awards, and credentials.">
-<meta property="og:image" content="https://nabilgr847.github.io/md-gausur-rahman-nabil.jpg">
+<meta property="og:title" content="Md Gausur Rahman Nabil — Interactive 3D Workstation">
+<meta property="og:description" content="Explore Md Gausur Rahman Nabil's 3D research desk and interactive NabilOS desktop featuring MedAI Hospital screenshots, publications, awards, and certifications.">
+<meta property="og:type" content="website">
 <meta property="og:url" content="https://nabilgr847.github.io/">
-<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://nabilgr847.github.io/md-gausur-rahman-nabil.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"ProfilePage","url":"https://nabilgr847.github.io/","mainEntity":{"@type":"Person","name":"Md Gausur Rahman Nabil","image":"https://nabilgr847.github.io/md-gausur-rahman-nabil.jpg","url":"https://nabilgr847.github.io/","email":"mailto:mdgausurrahmannabil@gmail.com","jobTitle":"Researcher and Software Developer","nationality":"Bangladeshi","sameAs":["https://github.com/nabilgr847","https://orcid.org/0009-0001-3110-0640","https://scholar.google.com/citations?user=iJNaglwAAAAJ"],"knowsAbout":["Medical AI","Biomedical research","Responsible AI","Cybersecurity","Full-stack software development"]}}
-</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script type="importmap">
 {
   "imports": {
@@ -29,13 +24,13 @@
 </script>
 <style>
   :root {
-    --ui-bg: rgba(9, 13, 22, 0.86);
-    --ui-border: rgba(148, 163, 184, 0.25);
+    --ui-bg: rgba(11, 18, 32, 0.94);
+    --ui-border: rgba(56, 189, 248, 0.34);
     --cyan: #38bdf8;
     --emerald: #34d399;
     --amber: #fbbf24;
-    --mono: "JetBrains Mono", ui-monospace, monospace;
-    --sans: "Inter", system-ui, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --sans: 'Inter', system-ui, -apple-system, sans-serif;
   }
   * { box-sizing: border-box; }
   html, body {
@@ -57,12 +52,54 @@
     inset: 0;
     z-index: 1;
     overflow: hidden;
+    touch-action: none;
   }
   #webgl-stage {
     position: fixed;
     inset: 0;
     z-index: 2;
     pointer-events: none;
+  }
+
+  /* Hover Tooltip & Toast for 3D Desk Interactions */
+  #hover-tip {
+    position: fixed;
+    z-index: 40;
+    pointer-events: none;
+    background: rgba(8, 15, 28, 0.95);
+    border: 1px solid rgba(56, 189, 248, 0.55);
+    color: #f0f9ff;
+    padding: 5px 11px;
+    border-radius: 8px;
+    font: 600 12px var(--mono);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
+    opacity: 0;
+    transform: translate(14px, 14px);
+    transition: opacity 0.14s ease;
+    white-space: nowrap;
+  }
+  #hover-tip.visible { opacity: 1; }
+
+  #desk-toast {
+    position: fixed;
+    bottom: 54px;
+    left: 50%;
+    transform: translate(-50%, 10px);
+    z-index: 45;
+    pointer-events: none;
+    background: rgba(11, 22, 38, 0.96);
+    border: 1px solid var(--emerald);
+    color: #ecfdf5;
+    padding: 8px 16px;
+    border-radius: 999px;
+    font: 600 12.5px var(--mono);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  #desk-toast.show {
+    opacity: 1;
+    transform: translate(-50%, 0);
   }
 
   /* Crisp 1:1 HD Monitor Dock (eliminates CSS3D scale blur when focused) */
@@ -73,20 +110,21 @@
     display: none;
     align-items: center;
     justify-content: center;
-    padding: 58px 18px 50px;
-    background: radial-gradient(circle at center, rgba(8, 16, 30, 0.72), rgba(4, 7, 14, 0.92));
+    padding: 64px 18px 50px;
+    background: radial-gradient(circle at center, rgba(8, 16, 30, 0.78), rgba(4, 7, 14, 0.95));
   }
   #os-hd-stage.active {
     display: flex;
   }
   .hd-bezel {
+    position: relative;
     width: min(96vw, 1140px);
-    height: min(82vh, 700px);
+    height: min(80vh, 690px);
     padding: 10px;
     border-radius: 14px;
     background: linear-gradient(160deg, #253044, #141c2b);
-    border: 1px solid rgba(56, 189, 248, 0.35);
-    box-shadow: 0 28px 80px rgba(0, 0, 0, 0.8), 0 0 50px rgba(56, 189, 248, 0.14);
+    border: 1px solid rgba(56, 189, 248, 0.42);
+    box-shadow: 0 28px 80px rgba(0, 0, 0, 0.85), 0 0 54px rgba(56, 189, 248, 0.16);
     display: flex;
   }
   .hd-bezel #os-screen {
@@ -100,8 +138,8 @@
   .hud-top {
     position: fixed;
     top: 12px;
-    left: 16px;
-    right: 16px;
+    left: 14px;
+    right: 14px;
     z-index: 30;
     display: flex;
     justify-content: space-between;
@@ -113,18 +151,18 @@
   .hud-group {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 7px;
     pointer-events: auto;
     flex-wrap: wrap;
   }
   .hud-pill {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 7px;
     background: var(--ui-bg);
     border: 1px solid var(--ui-border);
     color: #e2e8f0;
-    padding: 7px 13px;
+    padding: 7px 12px;
     border-radius: 999px;
     font-size: 12.5px;
     font-weight: 600;
@@ -189,7 +227,12 @@
     border-radius: 8px;
     box-shadow: inset 0 0 36px rgba(0, 0, 0, 0.55);
   }
-  /* Gentle corner vignette only when on 3D desk; zero scanline blur over text */
+  #os-screen[data-theme="emerald"] {
+    background: radial-gradient(circle at 25% 20%, #0b352d 0%, #071917 55%, #040b0a 100%);
+  }
+  #os-screen[data-theme="indigo"] {
+    background: radial-gradient(circle at 25% 20%, #1e1b4b 0%, #0d1025 55%, #060712 100%);
+  }
   #os-screen.desk-mode::after {
     content: "";
     position: absolute;
@@ -203,7 +246,7 @@
     position: absolute;
     inset: 0;
     z-index: 900;
-    background: rgba(6, 12, 22, 0.04);
+    background: rgba(6, 12, 22, 0.03);
     display: flex;
     align-items: flex-end;
     justify-content: center;
@@ -218,6 +261,7 @@
   }
   #os-screen:not(.desk-mode) #screen-veil {
     display: none;
+    pointer-events: none;
   }
   .veil-badge {
     background: rgba(15, 23, 42, 0.95);
@@ -240,10 +284,11 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
   }
   #boot-screen.hidden {
     opacity: 0;
+    visibility: hidden;
     pointer-events: none;
   }
   .boot-bar {
@@ -257,7 +302,7 @@
     height: 100%;
     width: 0%;
     background: #34d399;
-    transition: width 1s ease;
+    transition: width 0.75s ease;
   }
 
   .desktop {
@@ -277,17 +322,73 @@
     pointer-events: none;
   }
 
+  /* Live Desktop Status Widget on right side */
+  .desktop-widget {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    width: 240px;
+    background: rgba(11, 20, 36, 0.88);
+    border: 1px solid rgba(56, 189, 248, 0.28);
+    border-radius: 12px;
+    padding: 13px 14px;
+    z-index: 1;
+  }
+  .dw-title {
+    font: 700 11px var(--mono);
+    color: var(--cyan);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .dw-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+    margin-bottom: 10px;
+  }
+  .dw-stat {
+    background: rgba(15, 28, 48, 0.9);
+    border: 1px solid rgba(148, 163, 184, 0.16);
+    border-radius: 8px;
+    padding: 7px 9px;
+    cursor: pointer;
+    text-align: left;
+    color: #f1f5f9;
+    transition: border-color 0.15s;
+  }
+  .dw-stat:hover { border-color: var(--cyan); }
+  .dw-stat strong { display: block; font: 700 15px var(--mono); color: #fff; }
+  .dw-stat span { font-size: 11px; color: #94a3b8; }
+  .theme-dots {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font: 600 11px var(--mono);
+    color: #cbd5e1;
+    padding-top: 8px;
+    border-top: 1px solid rgba(148, 163, 184, 0.16);
+  }
+  .theme-dot-btn {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    cursor: pointer;
+    padding: 0;
+  }
+
   .desktop-icons {
     position: relative;
     z-index: 2;
     display: grid;
     grid-template-rows: repeat(5, auto);
     grid-auto-flow: column;
-    gap: 12px 14px;
+    gap: 10px 12px;
     width: max-content;
   }
   .d-icon {
-    width: 88px;
+    width: 90px;
     padding: 8px 6px;
     border-radius: 8px;
     border: 1px solid transparent;
@@ -301,11 +402,12 @@
     text-align: center;
     font-size: 12px;
     font-weight: 600;
-    transition: background 0.15s, border-color 0.15s;
+    transition: background 0.15s, border-color 0.15s, transform 0.12s;
   }
   .d-icon:hover {
     background: rgba(56, 189, 248, 0.16);
     border-color: rgba(56, 189, 248, 0.45);
+    transform: translateY(-1px);
   }
   .icon-glyph {
     width: 42px;
@@ -313,33 +415,33 @@
     border-radius: 10px;
     display: grid;
     place-items: center;
-    font: 700 17px var(--mono);
+    font: 700 16px var(--mono);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
   }
 
-  /* Solid crisp window surface (no backdrop-filter blur to keep text razor-sharp) */
+  /* Solid crisp window surface */
   .os-window {
     position: absolute;
     background: #0d1626;
-    border: 1px solid rgba(56, 189, 248, 0.45);
+    border: 1px solid rgba(56, 189, 248, 0.48);
     border-radius: 10px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.72);
+    box-shadow: 0 22px 54px rgba(0, 0, 0, 0.76);
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    min-width: 340px;
+    min-width: 320px;
     min-height: 240px;
-    max-width: calc(100% - 20px);
-    max-height: calc(100% - 20px);
+    max-width: calc(100% - 16px);
+    max-height: calc(100% - 16px);
   }
   .os-window.maximized {
-    left: 10px !important;
-    top: 10px !important;
-    width: calc(100% - 20px) !important;
-    height: calc(100% - 20px) !important;
+    left: 8px !important;
+    top: 8px !important;
+    width: calc(100% - 16px) !important;
+    height: calc(100% - 16px) !important;
   }
   .win-titlebar {
-    height: 36px;
+    height: 38px;
     padding: 0 12px;
     background: linear-gradient(90deg, #132842, #101d32);
     border-bottom: 1px solid rgba(56, 189, 248, 0.28);
@@ -348,23 +450,28 @@
     justify-content: space-between;
     cursor: grab;
     flex-shrink: 0;
+    touch-action: none;
   }
   .win-titlebar:active { cursor: grabbing; }
   .win-title {
     font: 600 12.5px var(--mono);
     color: #f0f9ff;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
-  .win-controls { display: flex; gap: 7px; }
+  .win-controls { display: flex; gap: 8px; flex-shrink: 0; }
   .win-btn {
-    width: 14px;
-    height: 14px;
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
     border: 0;
     cursor: pointer;
     padding: 0;
+    font: 700 11px/18px var(--mono);
+    color: #09111d;
+    display: grid;
+    place-items: center;
   }
   .win-btn.min { background: #fbbf24; }
   .win-btn.max { background: #34d399; }
@@ -372,7 +479,7 @@
   .win-body {
     flex: 1;
     overflow-y: auto;
-    padding: 18px 20px;
+    padding: 16px 18px;
     font-size: 14px;
     line-height: 1.62;
     user-select: text;
@@ -383,13 +490,13 @@
 
   .about-grid {
     display: grid;
-    grid-template-columns: 148px 1fr;
-    gap: 18px;
+    grid-template-columns: 142px 1fr;
+    gap: 16px;
     align-items: start;
   }
   .about-photo {
-    width: 148px;
-    height: 148px;
+    width: 142px;
+    height: 142px;
     border-radius: 12px;
     object-fit: cover;
     border: 2px solid rgba(56, 189, 248, 0.55);
@@ -461,17 +568,17 @@
     position: absolute;
     inset: 0;
     z-index: 950;
-    background: rgba(4, 8, 15, 0.94);
+    background: rgba(4, 8, 15, 0.95);
     display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 18px;
   }
   #shot-lightbox.open { display: flex; }
   #shot-lightbox img {
     max-width: 92%;
-    max-height: 82%;
+    max-height: 78%;
     object-fit: contain;
     border-radius: 8px;
     border: 1px solid rgba(56, 189, 248, 0.45);
@@ -482,9 +589,20 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 8px;
     margin-bottom: 10px;
     font: 600 13px var(--mono);
     color: #e0f2fe;
+  }
+  .lb-actions { display: flex; gap: 8px; }
+  .lb-nav {
+    background: #17253d;
+    color: #e0f2fe;
+    border: 1px solid rgba(56, 189, 248, 0.4);
+    border-radius: 6px;
+    padding: 5px 11px;
+    font: 700 12px var(--mono);
+    cursor: pointer;
   }
   .lb-close {
     background: #fb7185;
@@ -496,7 +614,7 @@
     cursor: pointer;
   }
 
-  .os-filters { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+  .os-filters { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; align-items: center; }
   .os-filter {
     background: #111c30;
     border: 1px solid rgba(56, 189, 248, 0.3);
@@ -508,6 +626,19 @@
   }
   .os-filter.active { background: #0ea5e9; color: #03111c; border-color: transparent; }
 
+  .os-search {
+    width: 100%;
+    background: #08101d;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    border-radius: 7px;
+    padding: 7px 11px;
+    color: #f1f5f9;
+    font: 13px var(--sans);
+    margin-bottom: 10px;
+    outline: none;
+  }
+  .os-search:focus { border-color: var(--cyan); }
+
   .copy-btn {
     background: rgba(56, 189, 248, 0.16);
     border: 1px solid rgba(56, 189, 248, 0.4);
@@ -516,19 +647,44 @@
     padding: 4px 10px;
     font: 600 11.5px var(--mono);
     cursor: pointer;
-    margin-left: 8px;
+    margin-left: 6px;
   }
-  .copy-btn:hover { background: rgba(56, 189, 248, 0.3); color: #fff; }
+  .copy-btn:hover { background: rgba(56, 189, 248, 0.32); color: #fff; }
+
+  /* MedAI Triage Interactive Simulator inside OS */
+  .sim-regions { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin: 10px 0; }
+  .sim-btn {
+    background: #132036;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    color: #f1f5f9;
+    padding: 10px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: left;
+    font: 600 13px var(--sans);
+  }
+  .sim-btn.active { border-color: var(--emerald); background: rgba(16, 185, 129, 0.16); }
 
   .term-wrap {
     background: #040912;
-    font: 13.5px/1.6 var(--mono);
+    font: 13px/1.6 var(--mono);
     color: #a7f3d0;
     height: 100%;
-    padding: 14px;
+    padding: 12px;
     display: flex;
     flex-direction: column;
   }
+  .term-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+  .term-chip {
+    background: #0e1a2e;
+    border: 1px solid rgba(52, 211, 153, 0.35);
+    color: #6ee7b7;
+    border-radius: 5px;
+    padding: 3px 8px;
+    font: 600 11px var(--mono);
+    cursor: pointer;
+  }
+  .term-chip:hover { background: rgba(52, 211, 153, 0.2); color: #fff; }
   .term-output { flex: 1; overflow-y: auto; white-space: pre-wrap; margin-bottom: 10px; }
   .term-input-row {
     display: flex;
@@ -543,7 +699,7 @@
     border: 0;
     outline: none;
     color: #fff;
-    font: 13.5px var(--mono);
+    font: 13px var(--mono);
   }
 
   .taskbar {
@@ -585,7 +741,7 @@
     position: absolute;
     bottom: 48px;
     left: 12px;
-    width: 245px;
+    width: 255px;
     background: #0b1322;
     border: 1px solid rgba(56, 189, 248, 0.42);
     border-radius: 10px;
@@ -610,9 +766,12 @@
   }
   .start-item:hover { background: rgba(56, 189, 248, 0.18); }
 
-  @media (max-width: 680px) {
+  @media (max-width: 720px) {
+    #os-hd-stage { padding: 84px 8px 44px; }
+    .desktop-widget { display: none; }
     .about-grid { grid-template-columns: 1fr; }
     .os-window { left: 8px !important; width: calc(100% - 16px) !important; }
+    .sim-regions { grid-template-columns: 1fr; }
     .hint-chip { font-size: 11px; max-width: 92vw; overflow: hidden; text-overflow: ellipsis; }
   }
 </style>
@@ -621,13 +780,17 @@
 
 <div id="css-stage"></div>
 <div id="webgl-stage"></div>
+<div id="hover-tip"></div>
+<div id="desk-toast"></div>
 <div id="os-hd-stage"><div class="hd-bezel" id="hdBezel"></div></div>
 
 <div class="hud-top">
   <div class="hud-group">
     <div class="hud-pill"><span class="status-dot"></span><span>NABIL_OS · 3D WORKSTATION</span></div>
     <button class="hud-pill hud-btn primary" id="toggleViewBtn">Focus Monitor Screen ↗</button>
-    <button class="hud-pill hud-btn" id="lampBtn">Desk Lamp: ON</button>
+    <button class="hud-pill hud-btn" id="wallCamBtn">Wall Gallery</button>
+    <button class="hud-pill hud-btn" id="lampBtn">Lamp: ON</button>
+    <button class="hud-pill hud-btn" id="rgbBtn">RGB: Cyan</button>
     <button class="hud-pill hud-btn" id="audioBtn">SFX: ON</button>
   </div>
   <div class="hud-group">
@@ -637,30 +800,34 @@
 </div>
 
 <div class="hud-bottom">
-  <div class="hint-chip" id="hintText">Drag to orbit 3D desk · Scroll to zoom · Click monitor screen for HD NabilOS</div>
+  <div class="hint-chip" id="hintText">Drag to orbit · Scroll to zoom · Click monitor, lamp, DNA, posters, keyboard, PC, or mug!</div>
 </div>
 
 <div id="os-mount" style="display:none">
-  <div id="os-screen" class="desk-mode">
+  <div id="os-screen" class="desk-mode" data-theme="cyan">
     <div id="screen-veil"><span class="veil-badge">Click Monitor for Crisp HD NabilOS ↗</span></div>
 
     <div id="shot-lightbox">
       <div class="lb-bar">
         <span id="lbCaption">MedAI Hospital Preview</span>
-        <button class="lb-close" id="lbClose">Close ✕</button>
+        <div class="lb-actions">
+          <button class="lb-nav" id="lbPrev">‹ Prev</button>
+          <button class="lb-nav" id="lbNext">Next ›</button>
+          <button class="lb-close" id="lbClose">Close ✕</button>
+        </div>
       </div>
       <img id="lbImg" src="" alt="MedAI Hospital Screenshot">
     </div>
 
     <div id="boot-screen">
       <div>
-        <div style="color:#38bdf8;font-weight:700">NABIL_BIOS v2.7 // MEDICAL AI &amp; FULL-STACK WORKSTATION</div>
-        <div style="margin-top:10px;color:#cbd5e1">Initializing Three.js WebGL + Crisp 1:1 HD Monitor Pipeline... OK</div>
-        <div style="color:#cbd5e1">Mounting MedAI Hospital Gallery &amp; Biomedical Research DB... OK</div>
-        <div style="color:#cbd5e1">Verifying 5 Papers, 6 Projects, 13 Awards &amp; 21 Credentials... OK</div>
+        <div style="color:#38bdf8;font-weight:700">NABIL_BIOS v3.0 // INTERACTIVE 3D MEDICAL AI WORKSTATION</div>
+        <div style="margin-top:10px;color:#cbd5e1">Initializing Three.js WebGL + 3D Raycast Interaction Engine... OK</div>
+        <div style="color:#cbd5e1">Mounting Crisp 1:1 HD Display Dock &amp; MedAI Hospital Gallery... OK</div>
+        <div style="color:#cbd5e1">Loading 5 Papers, 6 Projects, 13 Awards, 21 Certs &amp; Triage Sim... OK</div>
         <div class="boot-bar"><div class="boot-fill" id="bootFill"></div></div>
       </div>
-      <div style="color:#94a3b8;font-size:12px">Click anywhere or wait 1.2s to load desktop...</div>
+      <div style="color:#94a3b8;font-size:12px">Click anywhere or wait 0.8s to load desktop...</div>
     </div>
 
     <div class="desktop" id="desktop">
@@ -676,6 +843,10 @@
         <button class="d-icon" data-app="research">
           <div class="icon-glyph" style="background:linear-gradient(135deg,#6366f1,#38bdf8);color:#fff">DOI</div>
           <span>Research.pdf</span>
+        </button>
+        <button class="d-icon" data-app="medaiSim">
+          <div class="icon-glyph" style="background:linear-gradient(135deg,#ef4444,#f97316);color:#fff">+AI</div>
+          <span>MedAI_Sim.app</span>
         </button>
         <button class="d-icon" data-app="awards">
           <div class="icon-glyph" style="background:linear-gradient(135deg,#f59e0b,#d97706);color:#111">#1</div>
@@ -694,17 +865,36 @@
           <span>Contact.mail</span>
         </button>
       </div>
+
+      <div class="desktop-widget">
+        <div class="dw-title">Researcher Dashboard</div>
+        <div class="dw-stats">
+          <button class="dw-stat" data-app="research"><strong>5</strong><span>Papers &amp; DOIs</span></button>
+          <button class="dw-stat" data-app="projects"><strong>7</strong><span>MedAI Screens</span></button>
+          <button class="dw-stat" data-app="awards"><strong>13</strong><span>Honours</span></button>
+          <button class="dw-stat" data-app="credentials"><strong>21</strong><span>Credentials</span></button>
+        </div>
+        <div class="theme-dots">
+          <span>Wallpaper:</span>
+          <div style="display:flex;gap:7px">
+            <button class="theme-dot-btn" data-set-theme="cyan" title="Cyber Cyan" style="background:#0ea5e9"></button>
+            <button class="theme-dot-btn" data-set-theme="emerald" title="Bio Emerald" style="background:#10b981"></button>
+            <button class="theme-dot-btn" data-set-theme="indigo" title="Midnight Indigo" style="background:#6366f1"></button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="start-menu" id="startMenu">
       <div style="font:700 11px var(--mono);color:#38bdf8;padding:4px 10px 8px;border-bottom:1px solid rgba(56,189,248,0.2)">NABIL_OS APPLICATIONS</div>
       <button class="start-item" data-app="about"><span>About Nabil</span><span>Profile</span></button>
-      <button class="start-item" data-app="projects"><span>Projects &amp; Screenshots</span><span>Gallery</span></button>
+      <button class="start-item" data-app="projects"><span>Projects &amp; MedAI Gallery</span><span>7 Shots</span></button>
       <button class="start-item" data-app="research"><span>Research Papers (5)</span><span>DOI</span></button>
+      <button class="start-item" data-app="medaiSim"><span>MedAI Triage Simulator</span><span>Live</span></button>
       <button class="start-item" data-app="awards"><span>Awards &amp; Ranks (13)</span><span>Log</span></button>
-      <button class="start-item" data-app="credentials"><span>Certifications (21)</span><span>Filter</span></button>
+      <button class="start-item" data-app="credentials"><span>Certifications (21)</span><span>Search</span></button>
       <button class="start-item" data-app="terminal"><span>Interactive Terminal</span><span>CLI</span></button>
-      <button class="start-item" data-app="contact"><span>Contact &amp; Email</span><span>Net</span></button>
+      <button class="start-item" data-app="contact"><span>Contact &amp; Composer</span><span>Email</span></button>
     </div>
 
     <div class="taskbar">
@@ -746,11 +936,21 @@ function playClick(freq = 540, dur = 0.035) {
   } catch (_) {}
 }
 
+let toastTimer = null;
+const deskToast = document.getElementById('desk-toast');
+function showToast(msg) {
+  deskToast.textContent = msg;
+  deskToast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => deskToast.classList.remove('show'), 2600);
+}
+
 const cssStage = document.getElementById('css-stage');
 const webglStage = document.getElementById('webgl-stage');
 const osHdStage = document.getElementById('os-hd-stage');
 const hdBezel = document.getElementById('hdBezel');
 const osScreen = document.getElementById('os-screen');
+const hoverTip = document.getElementById('hover-tip');
 
 const scene = new THREE.Scene();
 const cssScene = new THREE.Scene();
@@ -758,6 +958,8 @@ const cssScene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 1, 2000);
 const DESK_CAM_POS = new THREE.Vector3(34, 78, 174);
 const DESK_TARGET = new THREE.Vector3(0, 38, -14);
+const WALL_CAM_POS = new THREE.Vector3(0, 96, 118);
+const WALL_TARGET = new THREE.Vector3(0, 86, -85);
 const SCREEN_POS = new THREE.Vector3(0, 48, -22);
 const SCREEN_ROT_X = -0.04;
 
@@ -787,7 +989,7 @@ controls.target.copy(DESK_TARGET);
 controls.enableDamping = true;
 controls.dampingFactor = 0.07;
 controls.minDistance = 42;
-controls.maxDistance = 260;
+controls.maxDistance = 265;
 controls.maxPolarAngle = Math.PI / 2 - 0.03;
 controls.minAzimuthAngle = -Math.PI / 2.3;
 controls.maxAzimuthAngle = Math.PI / 2.3;
@@ -807,17 +1009,17 @@ cutoutMesh.rotation.set(SCREEN_ROT_X, 0, 0);
 scene.add(cutoutMesh);
 
 // Lighting
-scene.add(new THREE.AmbientLight(0xa3bddc, 0.72));
+scene.add(new THREE.AmbientLight(0xa3bddc, 0.78));
 
-const monitorGlow = new THREE.PointLight(0x38bdf8, 2.0, 175);
-monitorGlow.position.set(0, 48, 10);
+const monitorGlow = new THREE.PointLight(0x38bdf8, 2.1, 185);
+monitorGlow.position.set(0, 48, 12);
 scene.add(monitorGlow);
 
 const rimLight = new THREE.DirectionalLight(0x6366f1, 0.95);
 rimLight.position.set(80, 95, -80);
 scene.add(rimLight);
 
-const lampSpot = new THREE.SpotLight(0xffcb7d, 3.4, 270, Math.PI / 4, 0.45, 1.2);
+const lampSpot = new THREE.SpotLight(0xffcb7d, 3.6, 280, Math.PI / 4, 0.45, 1.2);
 lampSpot.position.set(-88, 66, -16);
 lampSpot.target.position.set(-28, 0, 12);
 lampSpot.castShadow = true;
@@ -826,11 +1028,23 @@ scene.add(lampSpot);
 scene.add(lampSpot.target);
 
 // Materials
-const matDesk = new THREE.MeshStandardMaterial({ color: 0x2b1e16, roughness: 0.7, metalness: 0.08 });
+const matDesk = new THREE.MeshStandardMaterial({ color: 0x2b1e16, roughness: 0.68, metalness: 0.08 });
 const matMetal = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.35, metalness: 0.78 });
 const matMatte = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.85, metalness: 0.1 });
 const matBezel = new THREE.MeshStandardMaterial({ color: 0x1b2333, roughness: 0.45, metalness: 0.28 });
 const matRoom = new THREE.MeshStandardMaterial({ color: 0x090d16, roughness: 0.95 });
+
+// Interactive 3D Object Registry (for Raycaster hover + click!)
+const interactables = [];
+function registerInteractive(meshOrGroup, label, onClick) {
+  meshOrGroup.traverse(child => {
+    if (child.isMesh) {
+      child.userData.interactiveLabel = label;
+      child.userData.onInteract = onClick;
+      interactables.push(child);
+    }
+  });
+}
 
 // Room Floor & Back Wall
 const floor = new THREE.Mesh(new THREE.PlaneGeometry(900, 900), matRoom);
@@ -842,17 +1056,20 @@ const backWall = new THREE.Mesh(new THREE.PlaneGeometry(900, 450), new THREE.Mes
 backWall.position.set(0, 120, -90);
 scene.add(backWall);
 
-// Back-edge Subtle LED Ambient Light Strip
-const ledStrip = new THREE.Mesh(
-  new THREE.BoxGeometry(250, 1.4, 1.8),
-  new THREE.MeshBasicMaterial({ color: 0x22d3ee })
-);
+// Back-edge LED Ambient Light Strip & Desk Mat RGB Edge
+const ledStripMat = new THREE.MeshBasicMaterial({ color: 0x22d3ee });
+const ledStrip = new THREE.Mesh(new THREE.BoxGeometry(250, 1.5, 2), ledStripMat);
 ledStrip.position.set(0, 1, -60);
 scene.add(ledStrip);
 
+const matEdgeMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8 });
+const matEdge = new THREE.Mesh(new THREE.BoxGeometry(157.5, 0.5, 67.5), matEdgeMat);
+matEdge.position.set(2, 0.25, 18);
+scene.add(matEdge);
+
 // Framed 3D Wall Posters (Using Nabil's MedAI Hospital Screenshots!)
 const texLoader = new THREE.TextureLoader();
-function createWallFrame(x, y, w, h, imgPath, repeatY, offsetY) {
+function createWallFrame(x, y, w, h, imgPath, repeatY, offsetY, shotIndex, label) {
   const frameGroup = new THREE.Group();
   frameGroup.position.set(x, y, -88);
   const outer = new THREE.Mesh(new THREE.BoxGeometry(w + 6, h + 6, 3), matBezel);
@@ -860,18 +1077,21 @@ function createWallFrame(x, y, w, h, imgPath, repeatY, offsetY) {
   tex.colorSpace = THREE.SRGBColorSpace;
   tex.repeat.set(1, repeatY);
   tex.offset.set(0, offsetY);
-  const art = new THREE.Mesh(
-    new THREE.PlaneGeometry(w, h),
-    new THREE.MeshBasicMaterial({ map: tex })
-  );
+  const art = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ map: tex }));
   art.position.z = 1.7;
   frameGroup.add(outer, art);
   scene.add(frameGroup);
+  registerInteractive(frameGroup, label, () => {
+    transitionTo(true, () => {
+      openApp('projects');
+      openLightboxByIndex(shotIndex);
+    });
+  });
 }
-createWallFrame(-105, 92, 66, 46, './assets/screenshots/medai-landing.png', 0.34, 0.66);
-createWallFrame(105, 92, 66, 46, './assets/screenshots/medai-3d-anatomy.png', 0.24, 0.43);
+createWallFrame(-105, 92, 66, 46, './assets/screenshots/medai-landing.png', 0.34, 0.66, 0, 'MedAI Hospital Poster · Click to Inspect');
+createWallFrame(105, 92, 66, 46, './assets/screenshots/medai-3d-anatomy.png', 0.24, 0.43, 1, '3D Anatomy Mapper · Click to Inspect');
 
-// Center Wall Plaque (Canvas Texture — Only Nabil's Name)
+// Canvas Texture Helper (Only Nabil's Name)
 function makeTextTexture(title, subtitle, width = 512, height = 160, bg = '#0e1728', accent = '#38bdf8') {
   const c = document.createElement('canvas');
   c.width = width;
@@ -894,8 +1114,9 @@ function makeTextTexture(title, subtitle, width = 512, height = 160, bg = '#0e17
   return t;
 }
 
+// Center Wall Plaque
 const plaqueGroup = new THREE.Group();
-plaqueGroup.position.set(0, 118, -88);
+plaqueGroup.position.set(0, 120, -88);
 const plaqueFrame = new THREE.Mesh(new THREE.BoxGeometry(92, 26, 2.5), matMetal);
 const plaqueFace = new THREE.Mesh(
   new THREE.PlaneGeometry(88, 22),
@@ -904,6 +1125,37 @@ const plaqueFace = new THREE.Mesh(
 plaqueFace.position.z = 1.4;
 plaqueGroup.add(plaqueFrame, plaqueFace);
 scene.add(plaqueGroup);
+registerInteractive(plaqueGroup, 'About Md Gausur Rahman Nabil', () => transitionTo(true, () => openApp('about')));
+
+// Wall-Mounted Live UTC Clock Panel
+const wallClockCanvas = document.createElement('canvas');
+wallClockCanvas.width = 320;
+wallClockCanvas.height = 96;
+const wallClockCtx = wallClockCanvas.getContext('2d');
+const wallClockTex = new THREE.CanvasTexture(wallClockCanvas);
+wallClockTex.colorSpace = THREE.SRGBColorSpace;
+function updateWallClock() {
+  const now = new Date();
+  const timeStr = now.toUTCString().slice(17, 25) + ' UTC';
+  wallClockCtx.fillStyle = '#070f1d';
+  wallClockCtx.fillRect(0, 0, 320, 96);
+  wallClockCtx.strokeStyle = '#34d399';
+  wallClockCtx.lineWidth = 3;
+  wallClockCtx.strokeRect(5, 5, 310, 86);
+  wallClockCtx.fillStyle = '#34d399';
+  wallClockCtx.font = 'bold 28px monospace';
+  wallClockCtx.textAlign = 'center';
+  wallClockCtx.fillText(timeStr, 160, 48);
+  wallClockCtx.fillStyle = '#94a3b8';
+  wallClockCtx.font = '600 14px monospace';
+  wallClockCtx.fillText('WORKSTATION ONLINE · NABIL_OS', 160, 74);
+  wallClockTex.needsUpdate = true;
+}
+updateWallClock();
+setInterval(updateWallClock, 1000);
+const wallClockMesh = new THREE.Mesh(new THREE.PlaneGeometry(46, 14), new THREE.MeshBasicMaterial({ map: wallClockTex }));
+wallClockMesh.position.set(0, 96, -88.2);
+scene.add(wallClockMesh);
 
 // Desk Slab + Legs + Desk Mat
 const deskTop = new THREE.Mesh(new THREE.BoxGeometry(270, 6, 128), matDesk);
@@ -922,7 +1174,7 @@ deskMat.position.set(2, 0.4, 18);
 deskMat.receiveShadow = true;
 scene.add(deskMat);
 
-// Monitor Casing + Stand
+// Monitor Casing + Stand (Clickable to Focus Monitor!)
 const monitorGroup = new THREE.Group();
 monitorGroup.position.copy(SCREEN_POS);
 monitorGroup.rotation.set(SCREEN_ROT_X, 0, 0);
@@ -938,9 +1190,11 @@ const bRight = new THREE.Mesh(new THREE.BoxGeometry(5, 92, 8), matBezel);
 bRight.position.set(66.5, -1, -2);
 const monitorBack = new THREE.Mesh(new THREE.BoxGeometry(132, 86, 14), matBezel);
 monitorBack.position.set(0, -1, -10);
-const powerLed = new THREE.Mesh(new THREE.SphereGeometry(0.9, 10, 10), new THREE.MeshBasicMaterial({ color: 0x34d399 }));
+const powerLed = new THREE.Mesh(new THREE.SphereGeometry(1, 10, 10), new THREE.MeshBasicMaterial({ color: 0x34d399 }));
 powerLed.position.set(55, -44.5, 2.2);
 monitorGroup.add(bTop, bBot, bLeft, bRight, monitorBack, powerLed);
+registerInteractive(monitorGroup, 'Click Monitor for Crisp HD NabilOS', () => transitionTo(true));
+registerInteractive(cutoutMesh, 'Click Monitor for Crisp HD NabilOS', () => transitionTo(true));
 
 const standNeck = new THREE.Mesh(new THREE.BoxGeometry(16, 46, 7), matMetal);
 standNeck.position.set(0, 22, -32);
@@ -948,7 +1202,7 @@ const standBase = new THREE.Mesh(new THREE.BoxGeometry(52, 2.5, 32), matMetal);
 standBase.position.set(0, 1.25, -26);
 scene.add(standNeck, standBase);
 
-// Mechanical Keyboard
+// Mechanical Keyboard (Click to trigger typing wave & open Terminal!)
 const kbGroup = new THREE.Group();
 kbGroup.position.set(-4, 1.5, 20);
 kbGroup.rotation.x = 0.08;
@@ -956,7 +1210,7 @@ scene.add(kbGroup);
 kbGroup.add(new THREE.Mesh(new THREE.BoxGeometry(66, 2.6, 24), matBezel));
 const keyGeo = new THREE.BoxGeometry(3.2, 1.4, 3.2);
 const keyMat = new THREE.MeshStandardMaterial({ color: 0x334155, roughness: 0.45 });
-const accentKeyMat = new THREE.MeshStandardMaterial({ color: 0x0ea5e9, emissive: 0x0369a1, emissiveIntensity: 0.45 });
+const accentKeyMat = new THREE.MeshStandardMaterial({ color: 0x0ea5e9, emissive: 0x0369a1, emissiveIntensity: 0.5 });
 const keyMeshes = [];
 
 for (let r = 0; r < 4; r++) {
@@ -975,29 +1229,44 @@ spacebar.position.set(-2, 1.8, 6.9);
 spacebar.userData.baseY = 1.8;
 kbGroup.add(spacebar);
 keyMeshes.push(spacebar);
+registerInteractive(kbGroup, 'Mechanical Keyboard · Click to Open Terminal.sh', () => {
+  keyMeshes.forEach((k, i) => {
+    setTimeout(() => {
+      k.position.y = k.userData.baseY - 0.65;
+      setTimeout(() => { k.position.y = k.userData.baseY; }, 90);
+    }, i * 6);
+  });
+  playClick(760, 0.04);
+  setTimeout(() => transitionTo(true, () => openApp('terminal')), 260);
+});
 
 // Mouse
+const mouseGroup = new THREE.Group();
 const mouseBody = new THREE.Mesh(new THREE.BoxGeometry(12, 3.8, 19), matBezel);
 mouseBody.position.set(48, 2.4, 22);
 const mouseWheel = new THREE.Mesh(new THREE.BoxGeometry(1.4, 1.2, 3.4), accentKeyMat);
 mouseWheel.position.set(48, 4.4, 17);
-scene.add(mouseBody, mouseWheel);
+mouseGroup.add(mouseBody, mouseWheel);
+scene.add(mouseGroup);
+registerInteractive(mouseGroup, 'Wireless Mouse · Open Projects', () => transitionTo(true, () => openApp('projects')));
 
-// Coffee Mug + Steam
+// Coffee Mug + Steam (Click for Steam Boost!)
 const mugGroup = new THREE.Group();
 mugGroup.position.set(-72, 0, 22);
 scene.add(mugGroup);
 const mugBody = new THREE.Mesh(new THREE.CylinderGeometry(7.2, 6.5, 16, 24), new THREE.MeshStandardMaterial({ color: 0xe2e8f0, roughness: 0.35 }));
 mugBody.position.y = 8;
+const mugBand = new THREE.Mesh(new THREE.CylinderGeometry(7.05, 6.85, 3, 24), new THREE.MeshBasicMaterial({ color: 0x0ea5e9 }));
+mugBand.position.y = 11;
 const coffeeTop = new THREE.Mesh(new THREE.CircleGeometry(6.5, 24), new THREE.MeshStandardMaterial({ color: 0x2b170e, roughness: 0.25 }));
 coffeeTop.rotation.x = -Math.PI / 2;
 coffeeTop.position.y = 15.2;
 const mugHandle = new THREE.Mesh(new THREE.TorusGeometry(4.2, 1.1, 10, 20, Math.PI), new THREE.MeshStandardMaterial({ color: 0xe2e8f0, roughness: 0.35 }));
 mugHandle.rotation.z = -Math.PI / 2;
 mugHandle.position.set(-6.8, 8.5, 0);
-mugGroup.add(mugBody, coffeeTop, mugHandle);
+mugGroup.add(mugBody, mugBand, coffeeTop, mugHandle);
 
-const steamCount = 28;
+const steamCount = 34;
 const steamPos = new Float32Array(steamCount * 3);
 for (let i = 0; i < steamCount; i++) {
   steamPos[i * 3] = (Math.random() - 0.5) * 6;
@@ -1006,11 +1275,19 @@ for (let i = 0; i < steamCount; i++) {
 }
 const steamGeo = new THREE.BufferGeometry();
 steamGeo.setAttribute('position', new THREE.BufferAttribute(steamPos, 3));
-const steamPts = new THREE.Points(steamGeo, new THREE.PointsMaterial({ color: 0xe2e8f0, size: 1.8, transparent: true, opacity: 0.28 }));
+const steamMat = new THREE.PointsMaterial({ color: 0xe2e8f0, size: 1.9, transparent: true, opacity: 0.3 });
+const steamPts = new THREE.Points(steamGeo, steamMat);
 steamPts.position.set(-72, 17, 22);
 scene.add(steamPts);
 
-// Articulated Desk Lamp
+let steamBoost = 0;
+registerInteractive(mugGroup, 'Hot Coffee · Click for Fresh Brew', () => {
+  steamBoost = 2.0;
+  playClick(410, 0.05);
+  showToast('Coffee refilled — Ready for Medical AI research!');
+});
+
+// Articulated Desk Lamp (Clickable!)
 const lampGroup = new THREE.Group();
 lampGroup.position.set(-96, 0, -28);
 scene.add(lampGroup);
@@ -1029,8 +1306,9 @@ shade.rotation.z = 0.65;
 const bulb = new THREE.Mesh(new THREE.SphereGeometry(3.5, 16, 16), new THREE.MeshBasicMaterial({ color: 0xffd28a }));
 bulb.position.set(27, 54, 10);
 lampGroup.add(lampBase, arm1, arm2, shade, bulb);
+registerInteractive(lampGroup, 'Desk Lamp · Click to Toggle ON/OFF', () => toggleLamp());
 
-// Miniature 3D DNA Sculpture
+// Miniature 3D DNA Double Helix with Base-Pair Rungs!
 const dnaGroup = new THREE.Group();
 dnaGroup.position.set(-94, 0, -2);
 scene.add(dnaGroup);
@@ -1041,19 +1319,50 @@ dnaGroup.add(dnaPedestal);
 const dnaHelix = new THREE.Group();
 dnaHelix.position.y = 18;
 dnaGroup.add(dnaHelix);
-const dnaNodeGeo = new THREE.SphereGeometry(0.95, 10, 10);
-const dnaMat1 = new THREE.MeshStandardMaterial({ color: 0x22d3ee, emissive: 0x0891b2, emissiveIntensity: 0.85 });
-const dnaMat2 = new THREE.MeshStandardMaterial({ color: 0x34d399, emissive: 0x059669, emissiveIntensity: 0.85 });
+const dnaNodeGeo = new THREE.SphereGeometry(1.0, 10, 10);
+const dnaMat1 = new THREE.MeshStandardMaterial({ color: 0x22d3ee, emissive: 0x0891b2, emissiveIntensity: 0.9 });
+const dnaMat2 = new THREE.MeshStandardMaterial({ color: 0x34d399, emissive: 0x059669, emissiveIntensity: 0.9 });
+const rungMat = new THREE.MeshBasicMaterial({ color: 0x94a3b8 });
 for (let i = 0; i < 14; i++) {
   const t = i / 13;
   const ang = t * Math.PI * 3.2;
   const y = (t - 0.5) * 24;
+  const x1 = Math.cos(ang) * 4.4, z1 = Math.sin(ang) * 4.4;
+  const x2 = Math.cos(ang + Math.PI) * 4.4, z2 = Math.sin(ang + Math.PI) * 4.4;
   const n1 = new THREE.Mesh(dnaNodeGeo, dnaMat1);
-  n1.position.set(Math.cos(ang) * 4.2, y, Math.sin(ang) * 4.2);
+  n1.position.set(x1, y, z1);
   const n2 = new THREE.Mesh(dnaNodeGeo, dnaMat2);
-  n2.position.set(Math.cos(ang + Math.PI) * 4.2, y, Math.sin(ang + Math.PI) * 4.2);
-  dnaHelix.add(n1, n2);
+  n2.position.set(x2, y, z2);
+  const rung = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.22, 8.6, 6), rungMat);
+  rung.position.set(0, y, 0);
+  rung.rotation.z = Math.PI / 2;
+  rung.rotation.y = -ang;
+  dnaHelix.add(n1, n2, rung);
 }
+let dnaSpeedBoost = 0;
+registerInteractive(dnaGroup, 'Biomedical DNA Helix · Click to Open Research Papers', () => {
+  dnaSpeedBoost = 8;
+  playClick(680, 0.05);
+  showToast('DNA Research Helix activated — Opening Publications...');
+  setTimeout(() => transitionTo(true, () => openApp('research')), 320);
+});
+
+// Lab Vial Rack (Next to DNA Helix)
+const vialGroup = new THREE.Group();
+vialGroup.position.set(-112, 0, -2);
+scene.add(vialGroup);
+const rack = new THREE.Mesh(new THREE.BoxGeometry(12, 2.5, 5), matMetal);
+rack.position.y = 1.25;
+vialGroup.add(rack);
+[0x38bdf8, 0x34d399, 0xa855f7].forEach((col, idx) => {
+  const tube = new THREE.Mesh(
+    new THREE.CylinderGeometry(1.1, 1.1, 11, 12),
+    new THREE.MeshStandardMaterial({ color: col, emissive: col, emissiveIntensity: 0.45, transparent: true, opacity: 0.85 })
+  );
+  tube.position.set(-3.5 + idx * 3.5, 7, 0);
+  vialGroup.add(tube);
+});
+registerInteractive(vialGroup, 'Bio Lab Vials · Open MedAI Triage Sim', () => transitionTo(true, () => openApp('medaiSim')));
 
 // Small Ceramic Succulent Plant
 const plantGroup = new THREE.Group();
@@ -1071,20 +1380,29 @@ for (let i = 0; i < 7; i++) {
   leaf.rotation.x = Math.sin(ang) * 0.45;
   plantGroup.add(leaf);
 }
+registerInteractive(plantGroup, 'Desk Plant · Click for Bio Emerald Theme', () => {
+  setOsTheme('emerald');
+  showToast('Switched NabilOS wallpaper to Bio Emerald');
+});
 
-// PC Tower
+// Glass-Side PC Tower with Spinning RGB Fans (Click to Cycle RGB!)
 const pcGroup = new THREE.Group();
 pcGroup.position.set(102, 24, -18);
 pcGroup.rotation.y = -0.25;
 scene.add(pcGroup);
 const pcBody = new THREE.Mesh(new THREE.BoxGeometry(26, 48, 46), matBezel);
-const fan1 = new THREE.Mesh(new THREE.TorusGeometry(6, 0.9, 8, 24), new THREE.MeshBasicMaterial({ color: 0x38bdf8 }));
+const fan1Mat = new THREE.MeshBasicMaterial({ color: 0x38bdf8 });
+const fan2Mat = new THREE.MeshBasicMaterial({ color: 0x34d399 });
+const fan1 = new THREE.Mesh(new THREE.TorusGeometry(6, 0.9, 8, 24), fan1Mat);
 fan1.position.set(-13.2, 9, 8);
 fan1.rotation.y = Math.PI / 2;
-const fan2 = new THREE.Mesh(new THREE.TorusGeometry(6, 0.9, 8, 24), new THREE.MeshBasicMaterial({ color: 0x34d399 }));
+const fan2 = new THREE.Mesh(new THREE.TorusGeometry(6, 0.9, 8, 24), fan2Mat);
 fan2.position.set(-13.2, -9, 8);
 fan2.rotation.y = Math.PI / 2;
-pcGroup.add(pcBody, fan1, fan2);
+const gpuBar = new THREE.Mesh(new THREE.BoxGeometry(1.5, 2.2, 22), fan1Mat);
+gpuBar.position.set(-13.1, -1, -6);
+pcGroup.add(pcBody, fan1, fan2, gpuBar);
+registerInteractive(pcGroup, 'AI Workstation Tower · Click to Cycle RGB Lighting', () => cycleRgbTheme());
 
 // Desk Nameplate ("M. G. R. NABIL")
 const plateGroup = new THREE.Group();
@@ -1100,14 +1418,57 @@ const plateFace = new THREE.Mesh(
 plateFace.position.set(0, 0.3, 2.35);
 plateFace.rotation.x = -0.22;
 plateGroup.add(plateBlock, plateFace);
+registerInteractive(plateGroup, 'M. G. R. Nabil · Click for Profile & Awards', () => transitionTo(true, () => openApp('awards')));
 
-// Research Papers Stack
+// Research Papers Stack + Reference Book
+const paperGroup = new THREE.Group();
 const paperMat = new THREE.MeshStandardMaterial({ color: 0xf1f5f9, roughness: 0.9 });
 for (let i = 0; i < 4; i++) {
-  const sheet = new THREE.Mesh(new THREE.BoxGeometry(24, 0.6, 32), paperMat);
-  sheet.position.set(66, 0.4 + i * 0.7, -14);
+  const sheet = new THREE.Mesh(new THREE.BoxGeometry(24, 0.7, 32), paperMat);
+  sheet.position.set(66, 0.4 + i * 0.75, -14);
   sheet.rotation.y = (i - 1.5) * 0.08;
-  scene.add(sheet);
+  paperGroup.add(sheet);
+}
+const book = new THREE.Mesh(new THREE.BoxGeometry(22, 4.5, 30), new THREE.MeshStandardMaterial({ color: 0x0284c7, roughness: 0.6 }));
+book.position.set(67, 5.2, -14);
+book.rotation.y = 0.14;
+paperGroup.add(book);
+scene.add(paperGroup);
+registerInteractive(paperGroup, 'Research Papers Stack · Click to Open DOIs', () => transitionTo(true, () => openApp('research')));
+
+// =========================================================
+// RGB Theme Cycler + Desk Lamp Controls
+// =========================================================
+const RGB_THEMES = [
+  { name: 'Cyan', c1: 0x38bdf8, c2: 0x34d399, os: 'cyan' },
+  { name: 'Violet', c1: 0xa855f7, c2: 0xf43f5e, os: 'indigo' },
+  { name: 'Emerald', c1: 0x10b981, c2: 0x22d3ee, os: 'emerald' },
+  { name: 'Amber', c1: 0xfbbf24, c2: 0xf97316, os: 'cyan' }
+];
+let rgbIdx = 0;
+function cycleRgbTheme() {
+  rgbIdx = (rgbIdx + 1) % RGB_THEMES.length;
+  const t = RGB_THEMES[rgbIdx];
+  ledStripMat.color.setHex(t.c1);
+  matEdgeMat.color.setHex(t.c1);
+  fan1Mat.color.setHex(t.c1);
+  fan2Mat.color.setHex(t.c2);
+  monitorGlow.color.setHex(t.c1);
+  accentKeyMat.color.setHex(t.c1);
+  accentKeyMat.emissive.setHex(t.c1);
+  document.getElementById('rgbBtn').textContent = `RGB: ${t.name}`;
+  playClick(580, 0.04);
+  showToast(`Desk RGB set to ${t.name}`);
+}
+
+let lampOn = true;
+function toggleLamp() {
+  lampOn = !lampOn;
+  lampSpot.intensity = lampOn ? 3.6 : 0;
+  bulb.material.color.setHex(lampOn ? 0xffd28a : 0x334155);
+  document.getElementById('lampBtn').textContent = `Lamp: ${lampOn ? 'ON' : 'OFF'}`;
+  playClick(480);
+  showToast(`Desk Lamp ${lampOn ? 'ON' : 'OFF'}`);
 }
 
 // =========================================================
@@ -1131,6 +1492,7 @@ function dockToHD() {
   osHdStage.classList.add('active');
   hdBezel.appendChild(osScreen);
   osScreen.classList.remove('desk-mode');
+  hoverTip.classList.remove('visible');
 }
 
 function undockTo3D() {
@@ -1139,12 +1501,15 @@ function undockTo3D() {
   osScreen.style.width = '1024px';
   osScreen.style.height = '640px';
   osScreen.classList.add('desk-mode');
-  // Re-attach cleanly into CSS3DRenderer cameraElement on next frame
   const camEl = cssRenderer.domElement.firstChild?.firstChild;
   if (camEl && osScreen.parentNode !== camEl) camEl.appendChild(osScreen);
 }
 
-function transitionTo(toMonitor) {
+function transitionTo(toMonitor, afterDock) {
+  if (toMonitor && inMonitorMode && osHdStage.classList.contains('active')) {
+    if (afterDock) afterDock();
+    return;
+  }
   inMonitorMode = toMonitor;
   const targetPos = toMonitor ? getFocusCameraPos() : DESK_CAM_POS.clone();
   const targetLook = toMonitor ? SCREEN_POS.clone() : DESK_TARGET.clone();
@@ -1156,10 +1521,10 @@ function transitionTo(toMonitor) {
   const hint = document.getElementById('hintText');
   if (toMonitor) {
     btn.textContent = '← Back to 3D Desk (Esc)';
-    hint.textContent = 'Crisp HD NabilOS · Drag windows, view MedAI screenshots, or press Esc for 3D Desk';
+    hint.textContent = 'Crisp HD NabilOS · Drag windows, test MedAI Sim, browse 7 screenshots, or press Esc';
   } else {
     btn.textContent = 'Focus Monitor Screen ↗';
-    hint.textContent = 'Drag to orbit 3D desk · Scroll to zoom · Click monitor screen for HD NabilOS';
+    hint.textContent = 'Drag to orbit · Scroll to zoom · Click monitor, lamp, DNA, posters, keyboard, PC, or mug!';
   }
 
   animCam = {
@@ -1168,50 +1533,115 @@ function transitionTo(toMonitor) {
     startLook: controls.target.clone(),
     endLook: targetLook,
     t: 0,
-    onDone: toMonitor ? dockToHD : null
+    onDone: () => {
+      if (toMonitor) dockToHD();
+      if (afterDock) afterDock();
+    }
   };
   playClick(toMonitor ? 660 : 420, 0.05);
 }
 
+function flyCameraTo(pos, look) {
+  if (inMonitorMode) transitionTo(false);
+  animCam = {
+    startPos: camera.position.clone(),
+    endPos: pos.clone(),
+    startLook: controls.target.clone(),
+    endLook: look.clone(),
+    t: 0,
+    onDone: null
+  };
+  playClick(540, 0.04);
+}
+
 document.getElementById('toggleViewBtn').addEventListener('click', () => transitionTo(!inMonitorMode));
-document.getElementById('resetCamBtn').addEventListener('click', () => transitionTo(false));
-
-let veilDown = null;
-const veil = document.getElementById('screen-veil');
-veil.addEventListener('pointerdown', e => {
-  veilDown = { x: e.clientX, y: e.clientY };
-});
-veil.addEventListener('pointerup', e => {
-  if (!veilDown) return;
-  const dist = Math.hypot(e.clientX - veilDown.x, e.clientY - veilDown.y);
-  veilDown = null;
-  if (dist < 6) transitionTo(true);
-});
-
-window.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    const lb = document.getElementById('shot-lightbox');
-    if (lb.classList.contains('open')) {
-      lb.classList.remove('open');
-      return;
-    }
-    if (inMonitorMode && webglRenderer) transitionTo(false);
-  }
-});
-
-let lampOn = true;
-document.getElementById('lampBtn').addEventListener('click', e => {
-  lampOn = !lampOn;
-  lampSpot.intensity = lampOn ? 3.4 : 0;
-  bulb.material.color.setHex(lampOn ? 0xffd28a : 0x334155);
-  e.target.textContent = `Desk Lamp: ${lampOn ? 'ON' : 'OFF'}`;
-  playClick(480);
-});
-
+document.getElementById('resetCamBtn').addEventListener('click', () => flyCameraTo(DESK_CAM_POS, DESK_TARGET));
+document.getElementById('wallCamBtn').addEventListener('click', () => flyCameraTo(WALL_CAM_POS, WALL_TARGET));
+document.getElementById('lampBtn').addEventListener('click', toggleLamp);
+document.getElementById('rgbBtn').addEventListener('click', cycleRgbTheme);
 document.getElementById('audioBtn').addEventListener('click', e => {
   sfxEnabled = !sfxEnabled;
   e.target.textContent = `SFX: ${sfxEnabled ? 'ON' : 'OFF'}`;
   if (sfxEnabled) playClick(620);
+});
+
+// =========================================================
+// Bulletproof 3D Click + Hover Raycasting
+// (Works cleanly alongside OrbitControls pointer capture!)
+// =========================================================
+const raycaster = new THREE.Raycaster();
+const pointerNDC = new THREE.Vector2();
+let downInfo = null;
+
+function raycastAt(clientX, clientY) {
+  pointerNDC.x = (clientX / window.innerWidth) * 2 - 1;
+  pointerNDC.y = -(clientY / window.innerHeight) * 2 + 1;
+  raycaster.setFromCamera(pointerNDC, camera);
+  const hits = raycaster.intersectObjects(interactables, false);
+  return hits.length ? hits[0].object : null;
+}
+
+// Capture-phase pointerdown ensures we know if click started on #screen-veil BEFORE OrbitControls captures pointer!
+cssRenderer.domElement.addEventListener('pointerdown', e => {
+  if (inMonitorMode) return;
+  downInfo = {
+    x: e.clientX,
+    y: e.clientY,
+    onVeil: !!e.target.closest('#screen-veil')
+  };
+}, true);
+
+cssRenderer.domElement.addEventListener('pointermove', e => {
+  if (inMonitorMode || osHdStage.classList.contains('active')) {
+    hoverTip.classList.remove('visible');
+    return;
+  }
+  if (e.target.closest('#screen-veil')) {
+    hoverTip.textContent = 'Click Monitor for Crisp HD NabilOS ↗';
+    hoverTip.style.left = e.clientX + 'px';
+    hoverTip.style.top = e.clientY + 'px';
+    hoverTip.classList.add('visible');
+    cssRenderer.domElement.style.cursor = 'pointer';
+    return;
+  }
+  const hit = raycastAt(e.clientX, e.clientY);
+  if (hit && hit.userData.interactiveLabel) {
+    hoverTip.textContent = hit.userData.interactiveLabel;
+    hoverTip.style.left = e.clientX + 'px';
+    hoverTip.style.top = e.clientY + 'px';
+    hoverTip.classList.add('visible');
+    cssRenderer.domElement.style.cursor = 'pointer';
+  } else {
+    hoverTip.classList.remove('visible');
+    cssRenderer.domElement.style.cursor = 'grab';
+  }
+});
+
+cssRenderer.domElement.addEventListener('pointerup', e => {
+  if (!downInfo || inMonitorMode) return;
+  const dist = Math.hypot(e.clientX - downInfo.x, e.clientY - downInfo.y);
+  const startedOnVeil = downInfo.onVeil;
+  downInfo = null;
+  if (dist > 8) return; // Was a camera orbit drag, not a click
+
+  if (startedOnVeil) {
+    transitionTo(true);
+    return;
+  }
+  const hit = raycastAt(e.clientX, e.clientY);
+  if (hit && hit.userData.onInteract) {
+    hit.userData.onInteract();
+  }
+}, true);
+
+window.addEventListener('keydown', e => {
+  const lb = document.getElementById('shot-lightbox');
+  if (lb.classList.contains('open')) {
+    if (e.key === 'Escape') { lb.classList.remove('open'); return; }
+    if (e.key === 'ArrowRight') { stepLightbox(1); return; }
+    if (e.key === 'ArrowLeft') { stepLightbox(-1); return; }
+  }
+  if (e.key === 'Escape' && inMonitorMode && webglRenderer) transitionTo(false);
 });
 
 window.addEventListener('resize', () => {
@@ -1231,20 +1661,22 @@ function animate() {
   const dt = Math.min(clock.getDelta(), 0.05);
   const elapsed = clock.getElapsedTime();
 
-  dnaHelix.rotation.y = elapsed * 0.7;
-  fan1.rotation.z = elapsed * 4;
-  fan2.rotation.z = -elapsed * 4;
+  dnaSpeedBoost = Math.max(0, dnaSpeedBoost - dt * 4);
+  dnaHelix.rotation.y += dt * (0.75 + dnaSpeedBoost);
+  fan1.rotation.z = elapsed * 4.5;
+  fan2.rotation.z = -elapsed * 4.5;
 
+  steamBoost = Math.max(0, steamBoost - dt * 0.9);
   const sPos = steamGeo.attributes.position;
   for (let i = 0; i < steamCount; i++) {
-    let y = sPos.getY(i) + dt * 9;
+    let y = sPos.getY(i) + dt * (9 + steamBoost * 12);
     if (y > 26) y = 0;
     sPos.setY(i, y);
   }
   sPos.needsUpdate = true;
 
   if (animCam) {
-    animCam.t = Math.min(1, animCam.t + dt * 2.4);
+    animCam.t = Math.min(1, animCam.t + dt * 2.5);
     const ease = 1 - Math.pow(1 - animCam.t, 3);
     camera.position.lerpVectors(animCam.startPos, animCam.endPos, ease);
     controls.target.lerpVectors(animCam.startLook, animCam.endLook, ease);
@@ -1266,13 +1698,13 @@ function animate() {
 animate();
 
 // =========================================================
-// NabilOS Desktop Window Manager & Apps
+// NabilOS Desktop Window Manager & Interactive Apps
 // =========================================================
 const bootScreen = document.getElementById('boot-screen');
 const bootFill = document.getElementById('bootFill');
-setTimeout(() => { bootFill.style.width = '100%'; }, 80);
+setTimeout(() => { bootFill.style.width = '100%'; }, 60);
 const finishBoot = () => bootScreen.classList.add('hidden');
-setTimeout(finishBoot, 1250);
+setTimeout(finishBoot, 850);
 bootScreen.addEventListener('click', finishBoot);
 
 const desktop = document.getElementById('desktop');
@@ -1284,15 +1716,41 @@ const lb = document.getElementById('shot-lightbox');
 const lbImg = document.getElementById('lbImg');
 const lbCap = document.getElementById('lbCaption');
 
-document.getElementById('lbClose').addEventListener('click', () => lb.classList.remove('open'));
-lb.addEventListener('click', e => { if (e.target === lb) lb.classList.remove('open'); });
+const MEDAI_SHOTS = [
+  ['./assets/screenshots/medai-landing.png', '1/7 · MedAI Hospital Landing & Biometric Auth'],
+  ['./assets/screenshots/medai-3d-anatomy.png', '2/7 · Interactive 3D Anatomy Pain Mapper'],
+  ['./assets/screenshots/medai-assistant.png', '3/7 · MedAI Bilingual Health Assistant'],
+  ['./assets/screenshots/medai-prescriptions.png', '4/7 · Signed Digital Prescriptions & PDF'],
+  ['./assets/screenshots/medai-reports.png', '5/7 · AI Medical Report Upload & Analysis'],
+  ['./assets/screenshots/medai-appointments.png', '6/7 · Doctor & Patient Appointments'],
+  ['./assets/screenshots/medai-nearby.png', '7/7 · Nearby Healthcare & Map Lookup']
+];
 
-function openLightbox(src, caption) {
+let currentShotIdx = 0;
+function openLightboxByIndex(idx) {
+  currentShotIdx = (idx + MEDAI_SHOTS.length) % MEDAI_SHOTS.length;
+  const [src, cap] = MEDAI_SHOTS[currentShotIdx];
   lbImg.src = src;
-  lbCap.textContent = caption;
+  lbCap.textContent = cap;
   lb.classList.add('open');
   playClick(640);
 }
+function stepLightbox(delta) {
+  openLightboxByIndex(currentShotIdx + delta);
+}
+
+document.getElementById('lbPrev').addEventListener('click', () => stepLightbox(-1));
+document.getElementById('lbNext').addEventListener('click', () => stepLightbox(1));
+document.getElementById('lbClose').addEventListener('click', () => lb.classList.remove('open'));
+lb.addEventListener('click', e => { if (e.target === lb) lb.classList.remove('open'); });
+
+function setOsTheme(theme) {
+  osScreen.setAttribute('data-theme', theme);
+  playClick(600, 0.03);
+}
+document.querySelectorAll('[data-set-theme]').forEach(btn => {
+  btn.addEventListener('click', () => setOsTheme(btn.dataset.setTheme));
+});
 
 function updateClock() {
   const d = new Date();
@@ -1314,20 +1772,83 @@ function pulseKey() {
   setTimeout(() => { k.position.y = k.userData.baseY; }, 80);
 }
 
-const MEDAI_SHOTS = [
-  ['./assets/screenshots/medai-landing.png', 'MedAI Hospital · Landing & Biometric Auth'],
-  ['./assets/screenshots/medai-3d-anatomy.png', 'Interactive 3D Anatomy Pain Mapper'],
-  ['./assets/screenshots/medai-assistant.png', 'MedAI Bilingual Health Assistant'],
-  ['./assets/screenshots/medai-prescriptions.png', 'Signed Digital Prescriptions & PDF'],
-  ['./assets/screenshots/medai-reports.png', 'AI Medical Report Upload & Analysis'],
-  ['./assets/screenshots/medai-appointments.png', 'Doctor & Patient Appointments'],
-  ['./assets/screenshots/medai-nearby.png', 'Nearby Healthcare & Map Lookup']
+const PAPERS = [
+  {
+    date: '16 Nov 2026 · Journal Record',
+    title: 'MedAI: A Safety-Oriented Health-Information Prototype for Symptom Context, Biomedical Retrieval, and Clinician-Visit Preparation',
+    venue: 'Internet Medical Journal',
+    links: [['DOI / Publication Record ↗', 'https://doi.org/10.5281/ZENODO.24269016']],
+    abstract: 'Introduces a safety-first patient health-information architecture combining symptom structuring, curated biomedical retrieval, red-flag escalation, and structured visit-summary generation.',
+    cite: 'Nabil, M. G. R. (2026). MedAI: A Safety-Oriented Health-Information Prototype for Symptom Context, Biomedical Retrieval, and Clinician-Visit Preparation. Internet Medical Journal. https://doi.org/10.5281/ZENODO.24269016'
+  },
+  {
+    date: '5 Nov 2026 · Preprint',
+    title: 'Recombinant DNA Topoisomerases for Biomedical Research and Pharmaceutical Discovery',
+    venue: 'Expression platforms, functional assays, and translational applications.',
+    links: [
+      ['Cambridge Open Engage ↗', 'https://doi.org/10.33774/coe-2026-1r5hw'],
+      ['ScienceOpen ↗', 'https://doi.org/10.14293/PR2199.004798.v1']
+    ],
+    abstract: 'Reviews recombinant expression workflows, relaxation/cleavage assays, and antimicrobial & anticancer drug-screening strategies targeting DNA topoisomerases.',
+    cite: 'Nabil, M. G. R. (2026). Recombinant DNA Topoisomerases for Biomedical Research and Pharmaceutical Discovery. Cambridge Open Engage. https://doi.org/10.33774/coe-2026-1r5hw'
+  },
+  {
+    date: '28 Oct 2026 · Repository Record',
+    title: 'MedAI: A Safety-Oriented Health Information Prototype',
+    venue: 'Earlier Zenodo record for the MedAI research work.',
+    links: [['Zenodo Record ↗', 'https://doi.org/10.5281/ZENODO.23742165']],
+    abstract: 'Foundational repository artifact documenting MedAI system boundaries, bilingual patient workflows, and safety guardrails.',
+    cite: 'Nabil, M. G. R. (2026). MedAI: A Safety-Oriented Health Information Prototype. Zenodo. https://doi.org/10.5281/ZENODO.23742165'
+  },
+  {
+    date: '15 Oct 2026 · Preprint',
+    title: 'ReportSimple V3: Privacy-Preserving AI Framework for Multimodal Medical Report Analysis',
+    venue: 'Rule-based safety screening and interactive 3D symptom mapping.',
+    links: [['Cambridge Open Engage ↗', 'https://doi.org/10.33774/coe-2026-kpmvn']],
+    abstract: 'Presents a privacy-oriented multimodal diagnostic-report parser that maps lab markers to plain-language guidance and 3D anatomical context.',
+    cite: 'Nabil, M. G. R. (2026). ReportSimple V3: Privacy-Preserving AI Framework for Multimodal Medical Report Analysis. Cambridge Open Engage. https://doi.org/10.33774/coe-2026-kpmvn'
+  },
+  {
+    date: '8 Oct 2026 · Repository Record',
+    title: 'Artificial Intelligence in Early Disease Detection',
+    venue: 'Diagnostic performance, clinical applications, bias, explainability, and responsible governance.',
+    links: [['Zenodo Record ↗', 'https://doi.org/10.5281/ZENODO.23245696']],
+    abstract: 'Synthesizes early-detection AI benchmarks across imaging and clinical tabular data while examining calibration, fairness, and clinician oversight.',
+    cite: 'Nabil, M. G. R. (2026). Artificial Intelligence in Early Disease Detection. Zenodo. https://doi.org/10.5281/ZENODO.23245696'
+  }
 ];
+
+const SIM_DATA = {
+  head: {
+    region: 'Head & Neurological Context',
+    questions: ['Onset speed (sudden thunderclap vs gradual)?', 'Visual changes, photophobia, or neck stiffness?', 'Hydration, sleep, and blood pressure history?'],
+    redFlags: 'Sudden severe headache, focal weakness, confusion, or fever with stiff neck requires immediate emergency evaluation.',
+    prep: 'Log exact onset time, pain scale (1-10), and current medications before visiting your physician.'
+  },
+  chest: {
+    region: 'Chest & Cardiorespiratory Context',
+    questions: ['Does discomfort worsen with exertion or deep breathing?', 'Shortness of breath, sweating, or radiation to jaw/arm?', 'Recent respiratory infection or fever?'],
+    redFlags: 'Crushing chest pressure, breathlessness at rest, fainting, or radiating pain requires urgent emergency care.',
+    prep: 'Keep prior ECG/CXR reports and blood-pressure readings ready for clinician review.'
+  },
+  abdomen: {
+    region: 'Abdominal & GI Context',
+    questions: ['Exact quadrant localization (RLQ, epigastric, diffuse)?', 'Relationship to meals, nausea, or bowel changes?', 'Fever or persistent inability to keep fluids down?'],
+    redFlags: 'Rigid abdomen, persistent vomiting, high fever, or GI bleeding requires prompt medical attention.',
+    prep: 'Note meal timing, symptom duration, and any recent antibiotics or NSAID use.'
+  },
+  msk: {
+    region: 'Musculoskeletal & Joint Context',
+    questions: ['History of trauma, twisting injury, or repetitive strain?', 'Joint swelling, warmth, or restricted range of motion?', 'Morning stiffness duration?'],
+    redFlags: 'Inability to bear weight, visible deformity, numbness, or hot swollen joint with fever warrants urgent assessment.',
+    prep: 'Document movements that trigger or relieve pain and bring any prior X-ray/MRI reports.'
+  }
+};
 
 const APPS = {
   about: {
     title: 'About_Me.app — Md Gausur Rahman Nabil',
-    w: 630, h: 445, x: 130, y: 30,
+    w: 635, h: 460, x: 120, y: 26,
     html: `
       <div class="about-grid">
         <img class="about-photo" src="./md-gausur-rahman-nabil.jpg" alt="Md Gausur Rahman Nabil">
@@ -1342,6 +1863,11 @@ const APPS = {
             <span class="tag-chip">Cybersecurity</span>
             <span class="tag-chip">Full-Stack Dev</span>
           </div>
+          <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+            <button class="os-filter active" data-jump="projects">MedAI Screenshots (7) ↗</button>
+            <button class="os-filter" data-jump="research">Publications (5)</button>
+            <button class="os-filter" data-jump="contact">Email Nabil</button>
+          </div>
         </div>
       </div>
       <div class="item-card" style="margin-top:16px">
@@ -1350,7 +1876,7 @@ const APPS = {
         <p>SSC, 2023 — Tamirul Millat Kamil Madrasah (GPA 4.94)</p>
       </div>
       <div class="item-card">
-        <span class="meta-label">Profiles &amp; Portfolio Modes</span>
+        <span class="meta-label">Verified Profiles &amp; Portfolio Modes</span>
         <p style="margin-top:4px;line-height:1.9">
           <a href="https://orcid.org/0009-0001-3110-0640" target="_blank" rel="noopener">ORCID ↗</a> &nbsp;·&nbsp;
           <a href="https://scholar.google.com/citations?user=iJNaglwAAAAJ" target="_blank" rel="noopener">Google Scholar ↗</a> &nbsp;·&nbsp;
@@ -1361,39 +1887,44 @@ const APPS = {
     `
   },
   projects: {
-    title: 'Projects.app — MedAI Hospital Gallery & Builds (6)',
-    w: 680, h: 485, x: 155, y: 40,
+    title: 'Projects.app — MedAI Hospital Gallery & Builds',
+    w: 690, h: 495, x: 145, y: 34,
     html: `
-      <div class="item-card">
-        <span class="meta-label">Flagship Healthcare Application · Live Screenshots</span>
+      <div class="os-filters">
+        <button class="os-filter active" data-pcat="all">All Projects (6)</button>
+        <button class="os-filter" data-pcat="health">Healthcare AI</button>
+        <button class="os-filter" data-pcat="web">Web &amp; Full-Stack</button>
+      </div>
+      <div class="item-card p-card" data-pcat="health">
+        <span class="meta-label">Flagship Healthcare Application · Click any screenshot for HD Viewer</span>
         <h4>MedAI Hospital</h4>
         <p>Full-stack healthcare platform with patient &amp; doctor portals, bilingual MedAI Assistant, interactive 3D anatomy symptom mapping, AI report analysis, signed prescriptions, and biometric login.</p>
         <a href="https://medaionline-1.onrender.com" target="_blank" rel="noopener">Open Application ↗</a> &nbsp;·&nbsp;
         <a href="https://github.com/nabilgr847/MedAI-Hospital-Updated" target="_blank" rel="noopener">Source Repository ↗</a>
         <div class="shot-grid">
-          ${MEDAI_SHOTS.map(([src, cap]) => `
-            <button class="shot-thumb" data-shot="${src}" data-cap="${cap}">
+          ${MEDAI_SHOTS.map(([src, cap], idx) => `
+            <button class="shot-thumb" data-shot-idx="${idx}">
               <img src="${src}" alt="${cap}" loading="lazy">
               <span>${cap}</span>
             </button>
           `).join('')}
         </div>
       </div>
-      <div class="item-card">
+      <div class="item-card p-card" data-pcat="health">
         <span class="meta-label">Healthcare Application</span>
         <h4>ReportSimple V3</h4>
         <p>Prototype for multimodal medical-report analysis, rule-based safety screening, and interactive 3D symptom mapping.</p>
         <a href="https://reportsimple-v3.onrender.com" target="_blank" rel="noopener">Open Application ↗</a>
       </div>
-      <div class="item-card">
+      <div class="item-card p-card" data-pcat="health">
         <span class="meta-label">Python · GitHub</span>
         <h4>Doctor</h4>
         <p>Medical AI experiments and notebook-based development.</p>
         <a href="https://github.com/nabilgr847/Doctor" target="_blank" rel="noopener">View Repository ↗</a>
       </div>
-      <div class="item-card">
+      <div class="item-card p-card" data-pcat="web">
         <span class="meta-label">JavaScript · GitHub</span>
-        <h4>Full Stack Open &amp; Web Labs</h4>
+        <h4>Full Stack Open, Project-1 &amp; Portfolio Builds</h4>
         <p>Full Stack Open exercises, portfolio builds, and HTML/JS web experiments.</p>
         <a href="https://github.com/nabilgr847/Project-1" target="_blank" rel="noopener">Project-1 ↗</a> &nbsp;·&nbsp;
         <a href="https://github.com/nabilgr847/fullstack-hy2020.github.io" target="_blank" rel="noopener">Full Stack Open ↗</a> &nbsp;·&nbsp;
@@ -1403,64 +1934,68 @@ const APPS = {
   },
   research: {
     title: 'Research.pdf — Selected Publications & Preprints (5)',
-    w: 650, h: 450, x: 175, y: 50,
+    w: 660, h: 465, x: 165, y: 42,
+    html: PAPERS.map((p, idx) => `
+      <div class="item-card">
+        <span class="meta-label">${p.date}</span>
+        <h4>${p.title}</h4>
+        <p>${p.venue}</p>
+        <div class="paper-abs" style="display:none;background:#0a1322;padding:9px 11px;border-radius:6px;margin:8px 0;font-size:12.8px;color:#cbd5e1;border-left:3px solid #38bdf8">${p.abstract}</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:6px">
+          ${p.links.map(([lbl, url]) => `<a href="${url}" target="_blank" rel="noopener">${lbl}</a>`).join(' · ')}
+          <button class="copy-btn toggle-abs">Abstract</button>
+          <button class="copy-btn copy-cite" data-idx="${idx}">Copy Citation</button>
+        </div>
+      </div>
+    `).join('')
+  },
+  medaiSim: {
+    title: 'MedAI_Sim.app — Safety-Oriented Symptom Context Prototype',
+    w: 580, h: 430, x: 185, y: 50,
     html: `
       <div class="item-card">
-        <span class="meta-label">16 Nov 2026 · Journal Record</span>
-        <h4>MedAI: A Safety-Oriented Health-Information Prototype for Symptom Context, Biomedical Retrieval, and Clinician-Visit Preparation</h4>
-        <p>Internet Medical Journal.</p>
-        <a href="https://doi.org/10.5281/ZENODO.24269016" target="_blank" rel="noopener">DOI / Publication Record ↗</a>
+        <span class="meta-label">Interactive Research Prototype · Educational Demonstration Only</span>
+        <h4>Structured Clinician-Visit Preparation</h4>
+        <p>Select an anatomical region below to inspect how Nabil's MedAI prototype structures context, safety red flags, and pre-visit notes.</p>
+        <div class="sim-regions">
+          <button class="sim-btn active" data-sim="head">Head &amp; Neuro</button>
+          <button class="sim-btn" data-sim="chest">Chest &amp; Cardio</button>
+          <button class="sim-btn" data-sim="abdomen">Abdomen &amp; GI</button>
+          <button class="sim-btn" data-sim="msk">Joints &amp; MSK</button>
+        </div>
       </div>
-      <div class="item-card">
-        <span class="meta-label">5 Nov 2026 · Preprint</span>
-        <h4>Recombinant DNA Topoisomerases for Biomedical Research and Pharmaceutical Discovery</h4>
-        <p>Expression platforms, functional assays, and translational applications.</p>
-        <a href="https://doi.org/10.33774/coe-2026-1r5hw" target="_blank" rel="noopener">Cambridge Open Engage ↗</a> &nbsp;·&nbsp;
-        <a href="https://doi.org/10.14293/PR2199.004798.v1" target="_blank" rel="noopener">ScienceOpen ↗</a>
-      </div>
-      <div class="item-card">
-        <span class="meta-label">28 Oct 2026 · Repository Record</span>
-        <h4>MedAI: A Safety-Oriented Health Information Prototype</h4>
-        <p>Earlier Zenodo record for the MedAI research work.</p>
-        <a href="https://doi.org/10.5281/ZENODO.23742165" target="_blank" rel="noopener">Zenodo Record ↗</a>
-      </div>
-      <div class="item-card">
-        <span class="meta-label">15 Oct 2026 · Preprint</span>
-        <h4>ReportSimple V3: Privacy-Preserving AI Framework for Multimodal Medical Report Analysis</h4>
-        <p>Rule-based safety screening and interactive 3D symptom mapping.</p>
-        <a href="https://doi.org/10.33774/coe-2026-kpmvn" target="_blank" rel="noopener">Cambridge Open Engage ↗</a>
-      </div>
-      <div class="item-card">
-        <span class="meta-label">8 Oct 2026 · Repository Record</span>
-        <h4>Artificial Intelligence in Early Disease Detection</h4>
-        <p>Diagnostic performance, clinical applications, bias, explainability, and responsible governance.</p>
-        <a href="https://doi.org/10.5281/ZENODO.23245696" target="_blank" rel="noopener">Zenodo Record ↗</a>
-      </div>
+      <div class="item-card" id="simOutput"></div>
     `
   },
   awards: {
     title: 'Awards_13.log — Competitions & Academic Honours',
-    w: 600, h: 440, x: 205, y: 58,
-    html: [
-      ['Runner-up, Web Dev Open Track (18+)', 'International Digital Coding Competition · Nov 2026'],
-      ['AI Data Harness Solution Developer', 'Open Agent Hackathon, Zetaris × SpaceXSI · Nov 2026'],
-      ['Qualification-round participant', 'International Physics Competition 2026 · Nov 2026'],
-      ['Scholarship award', 'Immerse Education Essay Competition · Nov 2026'],
-      ['307th of 43,023 participants', 'All-Russian Olympiad in Artificial Intelligence · Oct 2026'],
-      ['Participant with ReportSimple', 'ForgeHacks Online 2026 · Oct 2026'],
-      ['Participant, AI agents track', 'GenAI Open Agent Hackathon · Oct 2026'],
-      ['Peak team rank: Silver', 'Cambridge Battlecode · Autumn 2026'],
-      ['Participant', 'Banana Hacks · 2026'],
-      ['Startup-Smart assessment: 9/10', 'UPFORGE Startup Intelligence Platform · Sep 2026'],
-      ['Praiseworthy position', 'International Creative Writing Contest · May 2025'],
-      ['3rd place, Quran Tilawat', 'NCPSC Inter House Cultural Competition · 2024'],
-      ['Online selection winner, secondary category', 'Bangladesh Mathematical Olympiad · 2023']
-    ].map(([t, s], idx) => `<div class="item-card"><span class="meta-label">#${String(idx + 1).padStart(2, '0')}</span><h4>${t}</h4><p>${s}</p></div>`).join('')
+    w: 600, h: 445, x: 200, y: 56,
+    html: `
+      <input class="os-search" id="awardSearch" placeholder="Search 13 awards (e.g. Coding, Olympiad, Cambridge, Hackathon)...">
+      <div id="awardList">
+      ${[
+        ['Runner-up, Web Dev Open Track (18+)', 'International Digital Coding Competition · Nov 2026'],
+        ['AI Data Harness Solution Developer', 'Open Agent Hackathon, Zetaris × SpaceXSI · Nov 2026'],
+        ['Qualification-round participant', 'International Physics Competition 2026 · Nov 2026'],
+        ['Scholarship award', 'Immerse Education Essay Competition · Nov 2026'],
+        ['307th of 43,023 participants', 'All-Russian Olympiad in Artificial Intelligence · Oct 2026'],
+        ['Participant with ReportSimple', 'ForgeHacks Online 2026 · Oct 2026'],
+        ['Participant, AI agents track', 'GenAI Open Agent Hackathon · Oct 2026'],
+        ['Peak team rank: Silver', 'Cambridge Battlecode · Autumn 2026'],
+        ['Participant', 'Banana Hacks · 2026'],
+        ['Startup-Smart assessment: 9/10', 'UPFORGE Startup Intelligence Platform · Sep 2026'],
+        ['Praiseworthy position', 'International Creative Writing Contest · May 2025'],
+        ['3rd place, Quran Tilawat', 'NCPSC Inter House Cultural Competition · 2024'],
+        ['Online selection winner, secondary category', 'Bangladesh Mathematical Olympiad · 2023']
+      ].map(([t, s], idx) => `<div class="item-card award-item"><span class="meta-label">#${String(idx + 1).padStart(2, '0')}</span><h4>${t}</h4><p>${s}</p></div>`).join('')}
+      </div>
+    `
   },
   credentials: {
     title: 'Credentials.db — 21 Certifications & Training',
-    w: 650, h: 460, x: 150, y: 45,
+    w: 650, h: 465, x: 150, y: 42,
     html: `
+      <input class="os-search" id="certSearch" placeholder="Search 21 credentials (e.g. Cisco, Google, Python, Cyber)...">
       <div class="os-filters">
         <button class="os-filter active" data-cat="all">All (21)</button>
         <button class="os-filter" data-cat="security">Cybersecurity</button>
@@ -1497,36 +2032,45 @@ const APPS = {
   },
   terminal: {
     title: 'Terminal.sh — NabilOS Shell',
-    w: 570, h: 390, x: 225, y: 85,
+    w: 585, h: 410, x: 215, y: 72,
     html: `
       <div class="term-wrap">
-        <div class="term-output" id="termOut">NabilOS v2.7 Shell — Type 'help' to see available commands.\n</div>
+        <div class="term-chips">
+          ${['neofetch', 'whoami', 'papers', 'projects', 'awards', 'email', 'rgb', 'lamp'].map(c => `<button class="term-chip" data-cmd="${c}">${c}</button>`).join('')}
+        </div>
+        <div class="term-output" id="termOut">NabilOS v3.0 Shell — Click any command chip above or type 'help'.\n</div>
         <div class="term-input-row">
           <span style="color:#38bdf8">nabil@medai:~$</span>
-          <input class="term-input" id="termInput" placeholder="type help, papers, projects, awards, whoami, email, lamp, exit..." autocomplete="off">
+          <input class="term-input" id="termInput" placeholder="type help, neofetch, papers, open projects, rgb, lamp..." autocomplete="off">
         </div>
       </div>
     `
   },
   contact: {
-    title: 'Contact.mail — Direct Email & Links',
-    w: 520, h: 345, x: 240, y: 95,
+    title: 'Contact.mail — Direct Email & Message Composer',
+    w: 540, h: 425, x: 225, y: 60,
     html: `
       <div class="item-card">
         <span class="meta-label">Direct Email</span>
         <h4 style="margin-top:6px">mdgausurrahmannabil@gmail.com</h4>
         <p style="margin-top:6px">
-          <a href="mailto:mdgausurrahmannabil@gmail.com">Send Email ↗</a>
+          <a href="mailto:mdgausurrahmannabil@gmail.com">Open Mail App ↗</a>
           <button class="copy-btn" id="copyEmailBtn">Copy Email</button>
         </p>
       </div>
       <div class="item-card">
+        <span class="meta-label">Quick Message Composer</span>
+        <input class="os-search" id="mailSubj" placeholder="Subject (e.g. Research Collaboration / Internship)" style="margin-top:8px">
+        <textarea class="os-search" id="mailBody" rows="3" placeholder="Write a short message for Md Gausur Rahman Nabil..." style="resize:vertical"></textarea>
+        <button class="os-filter active" id="sendComposeBtn">Compose in Email Client ↗</button>
+      </div>
+      <div class="item-card">
         <span class="meta-label">Academic &amp; Developer Profiles</span>
-        <p style="margin-top:8px;line-height:2">
-          • <a href="https://github.com/nabilgr847" target="_blank" rel="noopener">GitHub — github.com/nabilgr847 ↗</a><br>
-          • <a href="https://orcid.org/0009-0001-3110-0640" target="_blank" rel="noopener">ORCID — 0009-0001-3110-0640 ↗</a><br>
-          • <a href="https://scholar.google.com/citations?user=iJNaglwAAAAJ" target="_blank" rel="noopener">Google Scholar ↗</a><br>
-          • <a href="https://www.linkedin.com/in/gausur-rahman-nabil-4ba5b6233" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <p style="margin-top:6px;line-height:1.9">
+          <a href="https://github.com/nabilgr847" target="_blank" rel="noopener">GitHub ↗</a> &nbsp;·&nbsp;
+          <a href="https://orcid.org/0009-0001-3110-0640" target="_blank" rel="noopener">ORCID ↗</a> &nbsp;·&nbsp;
+          <a href="https://scholar.google.com/citations?user=iJNaglwAAAAJ" target="_blank" rel="noopener">Google Scholar ↗</a> &nbsp;·&nbsp;
+          <a href="https://www.linkedin.com/in/gausur-rahman-nabil-4ba5b6233" target="_blank" rel="noopener">LinkedIn ↗</a>
         </p>
       </div>
     `
@@ -1553,6 +2097,7 @@ function openApp(id) {
     return;
   }
   const spec = APPS[id];
+  if (!spec) return;
   const win = document.createElement('div');
   win.className = 'os-window';
   win.style.width = spec.w + 'px';
@@ -1563,9 +2108,9 @@ function openApp(id) {
     <div class="win-titlebar">
       <div class="win-title">${spec.title}</div>
       <div class="win-controls">
-        <button class="win-btn min" title="Minimize"></button>
-        <button class="win-btn max" title="Maximize"></button>
-        <button class="win-btn close" title="Close"></button>
+        <button class="win-btn min" title="Minimize">−</button>
+        <button class="win-btn max" title="Maximize">□</button>
+        <button class="win-btn close" title="Close">×</button>
       </div>
     </div>
     <div class="win-body">${spec.html}</div>
@@ -1589,11 +2134,12 @@ function openApp(id) {
   openWindows.set(id, { win, tab });
   focusWin(id);
 
-  win.addEventListener('mousedown', () => focusWin(id));
+  win.addEventListener('pointerdown', () => focusWin(id));
 
+  // Pointer-event dragging (works on both desktop mouse & touch!)
   const bar = win.querySelector('.win-titlebar');
-  bar.addEventListener('mousedown', e => {
-    if (e.target.classList.contains('win-btn') || win.classList.contains('maximized')) return;
+  bar.addEventListener('pointerdown', e => {
+    if (e.target.closest('.win-btn') || win.classList.contains('maximized')) return;
     e.preventDefault();
     const startX = e.clientX, startY = e.clientY;
     const origL = win.offsetLeft, origT = win.offsetTop;
@@ -1603,11 +2149,11 @@ function openApp(id) {
       win.style.top = Math.max(0, origT + (ev.clientY - startY) / scaleFactor) + 'px';
     };
     const onUp = () => {
-      window.removeEventListener('mousemove', onMove);
-      window.removeEventListener('mouseup', onUp);
+      window.removeEventListener('pointermove', onMove);
+      window.removeEventListener('pointerup', onUp);
     };
-    window.addEventListener('mousemove', onMove);
-    window.addEventListener('mouseup', onUp);
+    window.addEventListener('pointermove', onMove);
+    window.addEventListener('pointerup', onUp);
   });
 
   win.querySelector('.close').addEventListener('click', () => {
@@ -1624,9 +2170,78 @@ function openApp(id) {
     win.classList.toggle('maximized');
   });
 
+  if (id === 'about') {
+    win.querySelectorAll('[data-jump]').forEach(b => {
+      b.addEventListener('click', () => openApp(b.dataset.jump));
+    });
+  }
+
   if (id === 'projects') {
     win.querySelectorAll('.shot-thumb').forEach(btn => {
-      btn.addEventListener('click', () => openLightbox(btn.dataset.shot, btn.dataset.cap));
+      btn.addEventListener('click', () => openLightboxByIndex(Number(btn.dataset.shotIdx)));
+    });
+    win.querySelectorAll('[data-pcat]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const cat = btn.dataset.pcat;
+        win.querySelectorAll('[data-pcat]').forEach(b => b.classList.toggle('active', b === btn));
+        win.querySelectorAll('.p-card').forEach(c => {
+          c.style.display = (cat === 'all' || c.dataset.pcat === cat) ? 'block' : 'none';
+        });
+      });
+    });
+  }
+
+  if (id === 'research') {
+    win.querySelectorAll('.toggle-abs').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const box = btn.closest('.item-card').querySelector('.paper-abs');
+        const open = box.style.display === 'block';
+        box.style.display = open ? 'none' : 'block';
+        btn.textContent = open ? 'Abstract' : 'Hide Abstract';
+      });
+    });
+    win.querySelectorAll('.copy-cite').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(PAPERS[Number(btn.dataset.idx)].cite);
+          btn.textContent = 'Citation Copied!';
+          setTimeout(() => { btn.textContent = 'Copy Citation'; }, 1600);
+        } catch (_) {}
+      });
+    });
+  }
+
+  if (id === 'medaiSim') {
+    const out = win.querySelector('#simOutput');
+    const renderSim = key => {
+      const d = SIM_DATA[key];
+      out.innerHTML = `
+        <span class="meta-label">${d.region}</span>
+        <h4 style="margin-top:4px">Structured Intake Context</h4>
+        <ul style="margin:6px 0 10px 18px;padding:0;color:#cbd5e1;font-size:13px">
+          ${d.questions.map(q => `<li>${q}</li>`).join('')}
+        </ul>
+        <p style="color:#fda4af;font-size:12.8px"><strong>Safety Red-Flag Escalation:</strong> ${d.redFlags}</p>
+        <p style="color:#6ee7b7;font-size:12.8px;margin-bottom:0"><strong>Visit Preparation:</strong> ${d.prep}</p>
+      `;
+    };
+    renderSim('head');
+    win.querySelectorAll('.sim-btn').forEach(b => {
+      b.addEventListener('click', () => {
+        win.querySelectorAll('.sim-btn').forEach(x => x.classList.toggle('active', x === b));
+        renderSim(b.dataset.sim);
+        playClick(640, 0.03);
+      });
+    });
+  }
+
+  if (id === 'awards') {
+    const search = win.querySelector('#awardSearch');
+    search.addEventListener('input', () => {
+      const q = search.value.trim().toLowerCase();
+      win.querySelectorAll('.award-item').forEach(item => {
+        item.style.display = item.textContent.toLowerCase().includes(q) ? 'block' : 'none';
+      });
     });
   }
 
@@ -1639,16 +2254,30 @@ function openApp(id) {
         setTimeout(() => { copyBtn.textContent = 'Copy Email'; }, 1600);
       } catch (_) {}
     });
+    win.querySelector('#sendComposeBtn')?.addEventListener('click', () => {
+      const s = encodeURIComponent(win.querySelector('#mailSubj').value.trim() || 'Hello Md Gausur Rahman Nabil');
+      const b = encodeURIComponent(win.querySelector('#mailBody').value.trim());
+      window.location.href = `mailto:mdgausurrahmannabil@gmail.com?subject=${s}&body=${b}`;
+    });
   }
 
   if (id === 'credentials') {
+    let activeCat = 'all';
+    const search = win.querySelector('#certSearch');
+    const filterCerts = () => {
+      const q = search.value.trim().toLowerCase();
+      win.querySelectorAll('.os-cert').forEach(c => {
+        const matchCat = activeCat === 'all' || c.dataset.cat === activeCat;
+        const matchText = c.textContent.toLowerCase().includes(q);
+        c.style.display = (matchCat && matchText) ? 'block' : 'none';
+      });
+    };
+    search.addEventListener('input', filterCerts);
     win.querySelectorAll('.os-filter').forEach(btn => {
       btn.addEventListener('click', () => {
-        const cat = btn.dataset.cat;
+        activeCat = btn.dataset.cat;
         win.querySelectorAll('.os-filter').forEach(b => b.classList.toggle('active', b === btn));
-        win.querySelectorAll('.os-cert').forEach(c => {
-          c.style.display = (cat === 'all' || c.dataset.cat === cat) ? 'block' : 'none';
-        });
+        filterCerts();
       });
     });
   }
@@ -1656,16 +2285,13 @@ function openApp(id) {
   if (id === 'terminal') {
     const out = win.querySelector('#termOut');
     const inp = win.querySelector('#termInput');
-    setTimeout(() => inp.focus(), 50);
-    inp.addEventListener('keydown', e => {
-      pulseKey();
-      playClick(700, 0.02);
-      if (e.key !== 'Enter') return;
-      const cmd = inp.value.trim().toLowerCase();
-      inp.value = '';
+    const runCmd = raw => {
+      const cmd = raw.trim().toLowerCase();
       out.textContent += `\nnabil@medai:~$ ${cmd}\n`;
       if (cmd === 'help') {
-        out.textContent += `Commands: whoami, email, papers, projects, awards, skills, lamp, desk, clear, open <app>\n`;
+        out.textContent += `Commands: neofetch, whoami, email, papers, projects, awards, rgb, lamp, desk, clear, open <app>\n`;
+      } else if (cmd === 'neofetch') {
+        out.textContent += `  NABIL_OS v3.0 (3D WebGL + 1:1 HD Display)\n  User    : Md Gausur Rahman Nabil\n  Focus   : Medical AI · Biomedical · Cybersecurity\n  Papers  : 5 Publications & Preprints\n  Builds  : MedAI Hospital (7 screens), ReportSimple V3\n  Awards  : 13 Honours · 21 Verified Credentials\n`;
       } else if (cmd === 'whoami') {
         out.textContent += `Md Gausur Rahman Nabil — Researcher (Medical AI & Biomedical) & Full-Stack Developer, Bangladesh.\n`;
       } else if (cmd === 'email') {
@@ -1676,10 +2302,11 @@ function openApp(id) {
         out.textContent += `Projects: MedAI Hospital, ReportSimple V3, Doctor, Full Stack Open, Portfolio.\n`;
       } else if (cmd === 'awards') {
         out.textContent += `13 Awards: Runner-up Int'l Digital Coding Comp, 307/43,023 All-Russian AI Olympiad, Cambridge Battlecode Silver, BD Math Olympiad Winner.\n`;
-      } else if (cmd === 'skills') {
-        out.textContent += `Medical AI, Biomedical Research, Responsible AI, Cybersecurity (CCEP/CRPO), Python, JavaScript, Three.js.\n`;
+      } else if (cmd === 'rgb') {
+        cycleRgbTheme();
+        out.textContent += `Cycled 3D workstation RGB theme.\n`;
       } else if (cmd === 'lamp') {
-        document.getElementById('lampBtn').click();
+        toggleLamp();
         out.textContent += `Toggled desk lamp.\n`;
       } else if (cmd === 'desk' || cmd === 'exit') {
         if (webglRenderer) transitionTo(false);
@@ -1688,11 +2315,22 @@ function openApp(id) {
       } else if (cmd.startsWith('open ')) {
         const target = cmd.replace('open ', '').trim();
         if (APPS[target]) openApp(target);
-        else out.textContent += `Unknown app '${target}'. Try: about, research, projects, awards, credentials, contact.\n`;
+        else out.textContent += `Unknown app '${target}'. Try: about, research, projects, medaiSim, awards, credentials, contact.\n`;
       } else if (cmd) {
         out.textContent += `Command not found: ${cmd}. Type 'help'.\n`;
       }
       out.scrollTop = out.scrollHeight;
+    };
+    win.querySelectorAll('.term-chip').forEach(ch => {
+      ch.addEventListener('click', () => runCmd(ch.dataset.cmd));
+    });
+    setTimeout(() => inp.focus(), 50);
+    inp.addEventListener('keydown', e => {
+      pulseKey();
+      playClick(700, 0.02);
+      if (e.key !== 'Enter') return;
+      runCmd(inp.value);
+      inp.value = '';
     });
   }
 }
